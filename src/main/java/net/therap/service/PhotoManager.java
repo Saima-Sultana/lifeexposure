@@ -22,5 +22,5 @@ public interface PhotoManager {
     public List<PhotoComments> getPhotoComments(Photo photo);
     public byte[] getPhotoImage(long photoId) throws Exception;
     public void saveRating(PhotoRating photoRating);
-    public float getRating(Photo photo);
+    public double getRating(Photo photo);
 }

@@ -45,7 +45,7 @@
             <table bgcolor="f8f8ff" border="0" cellspacing="0" cellpadding="5">
                 <tr>
                     <td>Upload Photo:</td>
-                    <td><form:input path="photo" type="file" name="file" id="image"/></td>
+                    <td><input path="photo" type="file" name="file" id="image"/></td>
                     <td><form:errors path="photo" cssClass="error"/></td>
                 </tr>
                 <tr>

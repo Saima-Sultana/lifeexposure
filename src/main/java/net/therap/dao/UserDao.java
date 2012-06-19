@@ -1,9 +1,11 @@
 package net.therap.dao;
 
 import net.therap.domain.*;
+import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
 import java.sql.Blob;
 import java.util.List;
 
@@ -19,7 +21,9 @@ public class UserDao extends HibernateDaoSupport {
 
     public void saveUser(User user) {
         log.info("in saveUser");
-        this.getHibernateTemplate().saveOrUpdate(user);
+        Session session = getSession();
+        session.saveOrUpdate(user);
+        session.flush();
     }
 
     public User getUser(long id) {
@@ -30,17 +34,14 @@ public class UserDao extends HibernateDaoSupport {
         String query = "FROM User user WHERE user.loginName = :login_name";
 
         List<User> userList = this.getHibernateTemplate().findByNamedParam(query, "login_name", userName);
-        if (userList.size() == 0)
-            return null;
-        return userList.get(0);
+        return (userList.size() == 0) ? null:userList.get(0);
+
     }
 
     public Blob getUserImage(long userId) {
         String query = "SELECT user.profilePicThumbnail FROM User user WHERE user.userId = :user_id";
 
         List<Blob> blobList = this.getHibernateTemplate().findByNamedParam(query, "user_id", userId);
-        if (blobList.size() == 0)
-            return null;
-        return blobList.get(0);
+        return (blobList.size() == 0) ? null:blobList.get(0);
     }
 }

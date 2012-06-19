@@ -38,10 +38,6 @@
             <param-name>sessionFactoryBeanName</param-name>
             <param-value>sessionFactory</param-value>
         </init-param>
-        <init-param>
-		     <param-name>singleSession</param-name>
-		     <param-value>false</param-value>
-		</init-param>
     </filter>
 
     <filter-mapping>

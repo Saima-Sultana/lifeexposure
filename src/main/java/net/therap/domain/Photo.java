@@ -26,7 +26,7 @@ public class Photo {
     private String caption;
     private String location;
     private String description;
-    private float rating = 0;
+    private double rating = 0;
     private int report = 0;
     private int views = 0;
     private Set<PhotoComments> photoCommentsSet;
@@ -141,11 +141,11 @@ public class Photo {
     }
 
     @Column(name = "RATING", nullable = false)
-    public float getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

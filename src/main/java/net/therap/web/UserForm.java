@@ -44,9 +44,11 @@ public class UserForm {
     }
 
     @RequestMapping(value = "newuser.html", method = RequestMethod.POST)
-    public String processForm(@ModelAttribute("newUser") UserCmd userCmd, BindingResult result, ModelMap model) {
+    public String processForm(@ModelAttribute("newUser") UserCmd userCmd, BindingResult result, ModelMap model,
+                              @RequestParam("file") MultipartFile file) {
 
         log.info("in post");
+        userCmd.setProfilePicThumbnail(file);
         userValidator.validate(userCmd, result);
 
         if (result.hasErrors()) {
@@ -75,8 +77,10 @@ public class UserForm {
 
     @RequestMapping(value = "edituser.html", method = RequestMethod.POST)
     public String processEditForm(@ModelAttribute("editUser") UserCmd userCmd, BindingResult result,
-                                  ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+                                  ModelMap model, HttpServletRequest request, HttpServletResponse response,
+                                  @RequestParam("file") MultipartFile file) {
         log.info("after validation");
+        userCmd.setProfilePicThumbnail(file);
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("User");
 

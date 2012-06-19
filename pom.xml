@@ -11,6 +11,11 @@
     <properties>
         <spring.version>3.0.5.RELEASE</spring.version>
         <hibernate.version>3.3.2.GA</hibernate.version>
+
+        <testng.version>6.1.1</testng.version>
+        <easymock.version>3.1</easymock.version>
+        <unitils.version>3.3</unitils.version>
+        <hsqldb.version>2.2.8</hsqldb.version>
     </properties>
 
     <dependencies>
@@ -210,6 +215,108 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.8.1</version>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-dbunit</artifactId>
+            <version>${unitils.version}</version>
+            <scope>test</scope>
+
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-nop</artifactId>
+                </exclusion>
+            </exclusions>
+
+        </dependency>
+
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-core</artifactId>
+            <version>${unitils.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-orm</artifactId>
+            <version>${unitils.version}</version>
+            <scope>test</scope>
+
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-nop</artifactId>
+                </exclusion>
+            </exclusions>
+
+        </dependency>
+
+        <!--<dependency>-->
+        <!--<groupId>org.unitils</groupId>-->
+        <!--<artifactId>unitils-orm</artifactId>-->
+        <!--<version>3.3</version>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-spring</artifactId>
+            <version>${unitils.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-testng</artifactId>
+            <version>${unitils.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-easymock</artifactId>
+            <version>${unitils.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>${easymock.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-mock</artifactId>
+            <version>${unitils.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-inject</artifactId>
+            <version>${unitils.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>${hsqldb.version}</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

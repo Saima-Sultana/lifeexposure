@@ -2,6 +2,8 @@ package net.therap.dao;
 
 import net.therap.domain.Photo;
 import net.therap.domain.PhotoRating;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -20,23 +22,38 @@ public class PhotoRatingDao extends HibernateDaoSupport {
 
     public void saveRating(PhotoRating photoRating) {
         log.info("PhotoRatingDao: in saveRating");
-        this.getHibernateTemplate().saveOrUpdate(photoRating);
+        Session session = getSession();
+        session.saveOrUpdate(photoRating);
+        session.flush();
     }
 
-    public float getRating(Photo photo) {
+    public double getRating(Photo photo) {
         log.info("PhotoRatingDao: in getting ratings");
 
-        String query = "FROM PhotoRating photoRating WHERE photoRating.photo = :photoObj";
-        List<PhotoRating> ratingList = this.getHibernateTemplate().findByNamedParam(query, "photoObj", photo);
+/*        String query = "FROM PhotoRating photoRating WHERE photoRating.photo = :photoObj";
+        List<PhotoRating> ratingList = this.getHibernateTemplate().findByNamedParam(query, "photoObj", photo);*//*
 
-        /*String query2 = "SELECT AVG(photoRating.rating) from PhotoRating photoRating WHERE photoRating.photo = :photoObj";
-        List<Double> avgRatingList = this.getHibernateTemplate().findByNamedParam(query2, "photoObj", photo);
-        if(avgRatingList.isEmpty()) {
+        String query = "SELECT AVG(photoRating.rating) from PhotoRating photoRating WHERE photoRating.photo = :photoObj";
+        List<Double> avgRatingList = this.getHibernateTemplate().findByNamedParam(query, "photoObj", photo);
+        if(avgRatingList == null) {
           return 0;
         }
         log.info("ListSize:", avgRatingList.size());
         double avgRating = avgRatingList.get(0);
         return (float)avgRating;*/
-        return 0;
+        String query = "FROM PhotoRating photoRating WHERE photoRating.photo = :photoObj";
+        List<PhotoRating> ratingList = this.getHibernateTemplate().findByNamedParam(query, "photoObj", photo);
+
+        if (ratingList.isEmpty())
+            return 0;
+        else {
+            Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+            Query query1 = session.createQuery("SELECT AVG(photoRating.rating) from PhotoRating as photoRating WHERE photoRating.photo = :photoObj");
+            query1.setParameter("photoObj", photo);
+            return ((Double) query1.iterate().next()).doubleValue();
+
+            //return (avgRatingList.size() == 0) ? 0 : avgRatingList.get(0);
+        }
+
     }
 }

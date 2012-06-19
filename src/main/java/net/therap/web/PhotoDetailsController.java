@@ -60,7 +60,7 @@ public class PhotoDetailsController {
             log.info("com", commentsList.get(0));
 
         //@todo:check
-        float rating = photoManager.getRating(photo);
+        double rating = photoManager.getRating(photo);
         model.addAttribute("rating", rating);
 
         PhotoReviewCmd photoReviewCmd = new PhotoReviewCmd();
@@ -126,7 +126,7 @@ public class PhotoDetailsController {
         model.addAttribute("photoReview", photoReviewCmd);
 
         //@todo:check
-        float rating = photoManager.getRating(photo);
+        double rating = photoManager.getRating(photo);
         model.addAttribute("rating", rating);
 
         return "photodetails";

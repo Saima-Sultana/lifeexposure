@@ -86,7 +86,7 @@
             </tr>
             <tr>
                 <td>Profile Picture:</td>
-                <td><form:input path="profilePicThumbnail" type="file" name="file" id="image"/></td>
+                <td><input path="profilePicThumbnail" type="file" name="file" id="image"/></td>
                 <td><form:errors path="profilePicThumbnail" cssClass="error"/></td>
             </tr>
         </table>

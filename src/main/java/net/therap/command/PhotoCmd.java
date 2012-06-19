@@ -15,7 +15,7 @@ public class PhotoCmd {
     private String caption;
     private String location;
     private String description;
-    private float rating = 0;
+    private double rating = 0;
     private int report = 0;
     private int views = 0;
 
@@ -62,11 +62,11 @@ public class PhotoCmd {
         this.description = description;
     }
 
-    public float getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

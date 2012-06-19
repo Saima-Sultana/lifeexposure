@@ -2,6 +2,7 @@ package net.therap.dao;
 
 import net.therap.domain.Photo;
 import net.therap.domain.User;
+import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -21,7 +22,9 @@ public class PhotoDao extends HibernateDaoSupport {
 
     public void savePhoto(Photo photo) {
         log.info("in savePhoto");
-        this.getHibernateTemplate().saveOrUpdate(photo);
+        Session session = getSession();
+        session.saveOrUpdate(photo);
+        session.flush();
 /*        //for checking transaction
         throw new RuntimeException();*/
     }
@@ -43,8 +46,6 @@ public class PhotoDao extends HibernateDaoSupport {
         String query = "SELECT photo.photo FROM Photo photo WHERE photo.photoId = :photo_id";
 
         List<Blob> blobList = this.getHibernateTemplate().findByNamedParam(query, "photo_id", photoId);
-        if (blobList.size() == 0)
-            return null;
-        return blobList.get(0);
+        return (blobList.size() == 0) ? null:blobList.get(0);
     }
 }

@@ -94,7 +94,7 @@
                 </tr>
                 <tr>
                     <td>Profile Picture:</td>
-                    <td><form:input path="profilePicThumbnail" type="file" name="file" id="file" /></td>
+                    <td><input path="profilePicThumbnail" type="file" name="file" id="file" /></td>
                     <td><form:errors path="profilePicThumbnail" cssClass="error"/></td>
                 </tr>
             </table>

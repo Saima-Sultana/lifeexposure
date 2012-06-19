@@ -31,10 +31,12 @@ public class UserManagerImpl implements UserManager {
     public void saveUser(UserCmd userForm) {
         MultipartFile multipartFile = userForm.getProfilePicThumbnail();
         Blob blob = null;
-        try {
-            blob = Hibernate.createBlob(multipartFile.getInputStream());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (!multipartFile.isEmpty()) {
+            try {
+                blob = Hibernate.createBlob(multipartFile.getInputStream());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         User user = new User(userForm.getLoginName(), userForm.getPassword(), userForm.getFirstName(), userForm.getLastName(),
                 userForm.getBirthDate(), userForm.getEmail(), userForm.getCountry(), userForm.getGender());
@@ -55,10 +57,12 @@ public class UserManagerImpl implements UserManager {
 
         MultipartFile multipartFile = userCmd.getProfilePicThumbnail();
         Blob blob = null;
-        try {
-            blob = Hibernate.createBlob(multipartFile.getInputStream());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (!multipartFile.isEmpty()) {
+            try {
+                blob = Hibernate.createBlob(multipartFile.getInputStream());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         user.setProfilePicThumbnail(blob);
 

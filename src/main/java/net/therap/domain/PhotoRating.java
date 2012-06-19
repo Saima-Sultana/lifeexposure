@@ -17,18 +17,19 @@ public class PhotoRating {
     private long ratingId;
     private Photo photo;
     private User ratedBy;
-    private float rating;
+    private double rating;
     private long version;
 
     public PhotoRating() {
     }
 
-    public PhotoRating(float rating) {
+    public PhotoRating(double rating) {
         this.rating = rating;
     }
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "SS_RATING_SEQ", sequenceName = "SS_RATING_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SS_RATING_SEQ")
     @Column(name = "RATING_ID")
     public long getRatingId() {
         return ratingId;
@@ -59,11 +60,11 @@ public class PhotoRating {
     }
 
     @Column(name = "RATING")
-    public float getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

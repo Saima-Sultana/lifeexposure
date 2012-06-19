@@ -58,28 +58,43 @@
 </head>
 
 <body>
-    <table bottom:100 right:10>
+<table bottom:100 right:10>
+    <tr>
+        <td width="70" height="70">
+            <img src="image/userimage.html?userId=${userId}" alt="Header image" width="60" height="60" border="0"/>
+        </td>
+        <td>
+            <b><big>Hi! ${loginName} </big></b>
+        </td>
+    </tr>
+</table>
+
+<c:if test="${not empty photoList}">
+    <table>
         <tr>
-            <td width="70" height="70">
-                <img src="image/userimage.html?userId=${userId}" alt="Header image" width="60" height="60" border="0"/>
+            <td height="50px">
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td width="250px">
+                &nbsp;
             </td>
             <td>
-                <b><big>Hi! ${loginName} </big></b>
+                <div id="makeMeScrollable" align="center">
+                    <c:forEach var="entry" items="${photoList}">
+                        <a href="photodetails.html?photoId=${entry.photoId}">
+                            <img src="image/photoimage.html?photoId=${entry.photoId}" alt="Demo image"/>
+                        </a>
+                    </c:forEach>
+                </div>
             </td>
         </tr>
     </table>
 
-    <c:if test="${not empty photoList}">
-        <div id="makeMeScrollable">
-            <c:forEach var="entry" items="${photoList}">
-                <a href="photodetails.html?photoId=${entry.photoId}">
-                    <img src="image/photoimage.html?photoId=${entry.photoId}" alt="Demo image"/>
-                </a>
-            </c:forEach>
-        </div>
-    </c:if>
+</c:if>
 
-    <div id="reference" style="width: 1px; height: 1px;"></div>
+<div id="reference" style="width: 1px; height: 1px;"></div>
 </body>
 
 </html>

@@ -75,7 +75,7 @@ public class PhotoManagerImpl implements PhotoManager {
         photoRatingDao.saveRating(photoRating);
     }
 
-    public float getRating(Photo photo) {
+    public double getRating(Photo photo) {
         log.info("photomanager: in get rating");
         return photoRatingDao.getRating(photo);
     }

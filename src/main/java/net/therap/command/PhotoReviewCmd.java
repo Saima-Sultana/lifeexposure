@@ -9,7 +9,7 @@ package net.therap.command;
  */
 public class PhotoReviewCmd {
     private String comment;
-    private float rating;
+    private double rating;
 
     public PhotoReviewCmd() {
     }
@@ -22,11 +22,11 @@ public class PhotoReviewCmd {
         this.comment = comment;
     }
 
-    public float getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 }

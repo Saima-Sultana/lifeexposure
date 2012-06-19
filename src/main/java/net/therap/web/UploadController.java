@@ -57,9 +57,11 @@ public class UploadController {
 
     @RequestMapping(value = "upload.html", method = RequestMethod.POST)
     public String processForm(@ModelAttribute("photoCmd") PhotoCmd photoCmd, BindingResult result,
-                              ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+                              ModelMap model, HttpServletRequest request, HttpServletResponse response,
+                              @RequestParam("file") MultipartFile file) {
 
         log.info("in post upload");
+        photoCmd.setPhoto(file);
         photoValidator.validate(photoCmd, result);
 
         HttpSession session = request.getSession(false);
@@ -75,10 +77,12 @@ public class UploadController {
         MultipartFile multipartFile = photoCmd.getPhoto();
         Blob blob = null;
 
-        try {
-            blob = Hibernate.createBlob(multipartFile.getInputStream());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (!multipartFile.isEmpty()) {
+            try {
+                blob = Hibernate.createBlob(multipartFile.getInputStream());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         Photo photo = new Photo(photoCmd.getCaption(), photoCmd.getLocation(), photoCmd.getDescription());

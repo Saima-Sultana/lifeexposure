@@ -2,9 +2,11 @@ package net.therap.dao;
 
 import net.therap.domain.Photo;
 import net.therap.domain.PhotoComments;
+import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
 import java.util.List;
 
 /**
@@ -20,7 +22,9 @@ public class PhotoCommentDao extends HibernateDaoSupport {
 
     public void saveComment(PhotoComments photoComments) {
         log.info("in saveComment");
-        this.getHibernateTemplate().saveOrUpdate(photoComments);
+        Session session = getSession();
+        session.saveOrUpdate(photoComments);
+        session.flush();
     }
 
     public List<PhotoComments> getPhotoComments(Photo photo) {

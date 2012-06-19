@@ -48,6 +48,10 @@ public class PhotoManagerImpl implements PhotoManager {
         return photoDao.getPhotos(user);
     }
 
+    public List<Photo> getAllPhotos() {
+        return photoDao.getAllPhotos();
+    }
+
     public void saveComment(PhotoComments photoComments) {
         photoCommentDao.saveComment(photoComments);
     }

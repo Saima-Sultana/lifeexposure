@@ -1,7 +1,9 @@
 package net.therap.web;
 
 import net.therap.command.LoginCmd;
+import net.therap.domain.Photo;
 import net.therap.domain.User;
+import net.therap.service.PhotoManager;
 import net.therap.service.UserManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,16 +38,27 @@ public class LoginForm {
     @Autowired
     private LoginValidator loginValidator;
 
+    @Autowired
+    private PhotoManager photoManager;
+
     @RequestMapping(method = RequestMethod.GET)
-    public String showForm(ModelMap model) {
-        LoginCmd loginForm = new LoginCmd();
-        model.addAttribute("loginForm", loginForm);
+    public String showForm(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+        List<Photo> photoList = photoManager.getAllPhotos();
+        log.info("listSize", photoList.size());
+        model.addAttribute("photoList", photoList);
+
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("User") == null) {
+            LoginCmd loginForm = new LoginCmd();
+            model.addAttribute("loginForm", loginForm);
+        }
+
         return "loginform";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String processForm(@ModelAttribute("loginForm") LoginCmd loginForm, BindingResult result,
-                                    ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+                              ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         loginValidator.validate(loginForm, result);
 
         if (result.hasErrors()) {

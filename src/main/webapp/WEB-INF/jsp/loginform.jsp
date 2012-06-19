@@ -10,36 +10,110 @@
 <html>
 
 <head>
+    <!-- the CSS for Smooth Div Scroll -->
+    <link rel="Stylesheet" type="text/css" href='<c:url value="/css/smoothDivScroll.css"/>'/>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src='<c:url value="/js/jquery-ui-1.8.18.custom.min.js"/>' type="text/javascript"></script>
+    <script src='<c:url value="/js/jquery.mousewheel.min.js"/>' type="text/javascript"></script>
+    <script src='<c:url value="/js/jquery.smoothdivscroll-1.2-min.js"/>' type="text/javascript"></script>
+
+    <!-- Plugin initialization -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("div#makeMeScrollable").smoothDivScroll({
+                mousewheelScrolling: true,
+                manualContinuousScrolling: true,
+                visibleHotSpotBackgrounds: "always",
+                autoScrollingMode: ""
+            });
+        });
+    </script>
+
+    <!-- Styles for my specific scrolling content -->
+    <style type="text/css">
+        #makeMeScrollable {
+            width: 500px;
+            height: 330px;
+            position: relative;
+        }
+
+        #makeMeScrollable div.scrollableArea img {
+            position: relative;
+            display: block;
+            float: left;
+            margin: 0;
+            padding: 0;
+            /* If you don't want the images in the scroller to be selectable, try the following
+                  block of code. It's just a nice feature that prevent the images from
+                  accidentally becoming selected/inverted when the user interacts with the scroller. */
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+    </style>
 </head>
 
 <body>
-    <form:form method="POST" commandName="loginForm">
-        <br>
-        <br>
-        <fieldset>
-            <legend>LogIn</legend>
-            <table width="100%" align="right">
-                <tr>
-                    <td>User Name:</td>
-                    <td><form:input path="userName"/></td>
-                    <td><form:errors path="userName" cssClass="error"/></td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td><form:password path="password"/></td>
-                    <td><form:errors path="password" cssClass="error"/></td>
-                </tr>
-            </table>
-        </fieldset>
-        <br>
-        <input type="submit" align="right" value="Submit">
-    </form:form>
-
     <table>
         <tr>
+            <td height="50px">
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <c:if test="${empty User}">
+                <td>
+                    <form:form method="POST" commandName="loginForm">
+                        <fieldset>
+                            <legend>LogIn</legend>
+                            <table width="100%" align="right">
+                                <tr>
+                                    <td>User Name:</td>
+                                    <td><form:input path="userName"/></td>
+                                    <td><form:errors path="userName" cssClass="error"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Password:</td>
+                                    <td><form:password path="password"/></td>
+                                    <td><form:errors path="password" cssClass="error"/></td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                        <br>
+                        <input type="submit" align="right" value="Submit">
+                    </form:form>
+                </td>
+            </c:if>
+            <td width="50px">
+                &nbsp;
+            </td>
+            <td>
+                <div id="makeMeScrollable" align="center">
+                    <c:forEach var="entry" items="${photoList}">
+                        <c:if test="${empty User}">
+                        <a href="photodetailspublic.html?photoId=${entry.photoId}">
+                            <img src="image/photoimage.html?photoId=${entry.photoId}" alt="Demo image"/>
+                        </a>
+                        </c:if>
+                        <c:if test="${not empty User}">
+                        <a href="photodetails.html?photoId=${entry.photoId}">
+                            <img src="image/photoimage.html?photoId=${entry.photoId}" alt="Demo image"/>
+                        </a>
+                        </c:if>
+                    </c:forEach>
+                </div>
+            </td>
+        </tr>
+        <tr align="left">
             <td><a href="newuser.html">Sign Up</a></td>
         </tr>
     </table>
+
+<div id="reference" style="width: 1px; height: 1px;"></div>
+
 </body>
 
 </html>

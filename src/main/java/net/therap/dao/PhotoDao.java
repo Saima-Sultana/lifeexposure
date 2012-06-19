@@ -34,10 +34,17 @@ public class PhotoDao extends HibernateDaoSupport {
     }
 
     public List<Photo> getPhotos(User user) {
-        log.info("in getting comments");
         String query = "FROM Photo photo WHERE photo.user = :userObj";
 
         List<Photo> photos = this.getHibernateTemplate().findByNamedParam(query, "userObj", user);
+        log.info("in dao", photos);
+        return photos;
+    }
+
+    public List<Photo> getAllPhotos() {
+        String query = "FROM Photo photo";
+
+        List<Photo> photos = this.getHibernateTemplate().find(query);
         log.info("in dao", photos);
         return photos;
     }

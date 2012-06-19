@@ -18,6 +18,7 @@ public interface PhotoManager {
     public void savePhoto(Photo photo);
     public Photo getPhoto(long id);
     public List<Photo> getPhotos(User user);
+    public List<Photo> getAllPhotos();
     public void saveComment(PhotoComments photoComments);
     public List<PhotoComments> getPhotoComments(Photo photo);
     public byte[] getPhotoImage(long photoId) throws Exception;

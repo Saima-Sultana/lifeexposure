@@ -21,10 +21,8 @@
         </tr>
         <tr bgcolor="#C0DFFD">
             <td colspan="7" id="dateformat" height="20">&nbsp;&nbsp;
-                <script language="JavaScript" type="text/javascript">
-                    <fmt:formatDate var="TODAY" value="<%=new java.util.Date()%>" type="DATE"/>
-                    document.write("${TODAY}");
-                </script>
+                <fmt:formatDate var="TODAY" value="<%=new java.util.Date()%>" type="DATE"/>
+                ${TODAY}
             </td>
         </tr>
         <tr>

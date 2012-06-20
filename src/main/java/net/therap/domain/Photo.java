@@ -1,14 +1,16 @@
 package net.therap.domain;
 
 import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.sql.Blob;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
- * User: saima
+ * User: shaila
  * Date: 5/31/12
  * Time: 11:46 AM
  * To change this template use File | Settings | File Templates.
@@ -26,12 +28,11 @@ public class Photo {
     private String caption;
     private String location;
     private String description;
-    private double rating = 0;
-    private int report = 0;
     private int views = 0;
     private Set<PhotoComments> photoCommentsSet;
     private Set<PhotoRating> photoRatingSet;
-/*    private PhotoDetails photoDetails;*/
+    private Set<PhotoTag> photoTags = new HashSet<PhotoTag>(0);    ////many to many
+    /*private PhotoDetails photoDetails;*/
     private long version;
 
     public Photo() {
@@ -44,8 +45,8 @@ public class Photo {
     }
 
     @Id
-    @SequenceGenerator(name = "SS_PHOTO_SEQ",sequenceName = "SS_PHOTO_SEQ")
-    @GeneratedValue(strategy = GenerationType.AUTO,generator = "SS_PHOTO_SEQ")
+    @SequenceGenerator(name = "SS_PHOTO_SEQ", sequenceName = "SS_PHOTO_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SS_PHOTO_SEQ")
     @Column(name = "PHOTO_ID")
     public long getPhotoId() {
         return photoId;
@@ -140,24 +141,6 @@ public class Photo {
         this.description = description;
     }
 
-    @Column(name = "RATING", nullable = false)
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
-    @Column(name = "REPORT", nullable = false)
-    public int getReport() {
-        return report;
-    }
-
-    public void setReport(int report) {
-        this.report = report;
-    }
-
     @Column(name = "VIEWS", nullable = false)
     public int getViews() {
         return views;
@@ -189,15 +172,15 @@ public class Photo {
         this.photoRatingSet = photoRatingSet;
     }
 
-/*    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="PHOTO_DETAILS_ID", unique = true)
-    public PhotoDetails getPhotoDetails() {
-        return photoDetails;
+    @ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "SS_PHOTO_TAG", joinColumns = { @JoinColumn(name = "PHOTO_ID") }, inverseJoinColumns = { @JoinColumn(name = "TAG_ID") })
+    public Set<PhotoTag> getPhotoTags() {
+        return photoTags;
     }
 
-    public void setPhotoDetails(PhotoDetails photoDetails) {
-        this.photoDetails = photoDetails;
-    } */
+    public void setPhotoTags(Set<PhotoTag> photoTags) {
+        this.photoTags = photoTags;
+    }
 
     @Version
     public long getVersion() {

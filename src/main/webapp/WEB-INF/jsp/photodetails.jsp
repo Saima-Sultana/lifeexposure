@@ -27,19 +27,58 @@
 <form:form method="POST" commandName="photoReview">
     <table>
         <tr>
-            <td align="left">
+            <td height="50px">
+               &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <table>
                     <tr>
                         <td>
                             <img src="image/photoimage.html?photoId=${photo.photoId}" alt="photo" border="0"/>
                         </td>
                     </tr>
-                    <td>
-                            ${photo.caption}
-                    </td>
+                    <tr>
+                        <td>
+                            <b>${photo.caption}</b>
+                        </td>
+                    </tr>
+                    <c:if test="${not empty photo.description} ">
+                        <tr>
+                            <td class="tableText">
+                                ${photo.description}
+                            </td>
+                        </tr>
+                    </c:if>
+                    <c:if test="${not empty photo.location} ">
+                        <tr>
+                            <td class="tableText">
+                                Location: ${photo.location}
+                            </td>
+                        </tr>
+                    </c:if>
+                    <tr>
+                        <td>Rating:</td>
+                        <td>${rating}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form:hidden id="rating" path="rating"/>
+                        </td>
+                        <td>
+                            <input type="submit" value="Rate" name="rate">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="error">
+                            ${error}
+                        </td>
+                    </tr>
                 </table>
             </td>
-            <td width="100%">
+            <td width="50px">
+                &nbsp;
             </td>
             <td>
                 <table bgcolor="f8f8ff" border="0" cellspacing="0" cellpadding="5">
@@ -49,25 +88,26 @@
                                  border="0"/>
                         </td>
                         <td>
-                            <b><big>Uploaded by ${loginName} </big></b>
+                            <b><big>Uploaded by ${uploadedBy} </big></b>
                         </td>
                     </tr>
-                    <br>
-                    <br>
                     <tr>
-                        <c:if test="${not empty commentList}">
-                            <fieldset>
-                                <legend>Photo Comments</legend>
-                                <c:forEach var="comment" items="${commentList}">
-                                    <tr>
-                                        <td>${comment.commentedBy.loginName}</td>
-                                        <td>${comment.photoComment}</td>
-                                    </tr>
-                                </c:forEach>
-                            </fieldset>
-                        </c:if>
+                        <td height="20px">
+                            &nbsp;
+                        </td>
                     </tr>
                 </table>
+                <table bgcolor="f8f8ff" border="3" bordercolor = "#ffffff" cellspacing="0" cellpadding="5" title="Photo Comments" >
+                    <c:if test="${not empty commentList}">
+                        <c:forEach var="comment" items="${commentList}">
+                            <tr>
+                                <td class="tableText">${comment.commentedBy.loginName}</td>
+                                <td>${comment.photoComment}</td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                </table>
+                <br>
                 <br>
                 <table>
                     <tr>
@@ -76,23 +116,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <%--@todo--%>
+                                <%--@todo--%>
                             <input type="submit" align="middle" value="Comment" name="comment">
                         </td>
-                    </tr>
-                    <tr>
-                        <td>rating:</td>
-                        <td>${rating}</td>
                     </tr>
                 </table>
             </td>
         </tr>
-        <tr>
-            <td><form:hidden id="rating" path="rating"/></td>
-        </tr>
-        <td>
-            <input type="submit" value="Rate" name="rate">
-        </td>
     </table>
 </form:form>
 </body>

@@ -10,7 +10,6 @@ import javax.persistence.*;
  * To change this template use File | Settings | File Templates.
  */
 
-//@todo:check
 @Entity
 @Table(name = "SS_RATING", uniqueConstraints = { @UniqueConstraint(columnNames = { "USER_ID", "PHOTO_ID" }) })
 public class PhotoRating {

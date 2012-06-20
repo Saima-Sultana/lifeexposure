@@ -1,10 +1,10 @@
 package net.therap.web;
 
+import net.therap.command.PhotoReviewCmd;
 import net.therap.domain.Photo;
 import net.therap.domain.PhotoComments;
 import net.therap.domain.PhotoRating;
 import net.therap.domain.User;
-import net.therap.command.PhotoReviewCmd;
 import net.therap.service.PhotoManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,20 +46,19 @@ public class PhotoDetailsController {
             return "redirect:loginform.html";
         }
         User user = (User) session.getAttribute("User");
-        model.addAttribute("loginName", user.getLoginName());
         model.addAttribute("userId", user.getUserId());
 
         long photoId = ServletRequestUtils.getLongParameter(request, "photoId", -1);
         Photo photo = photoManager.getPhoto(photoId);
         session.setAttribute("Photo", photo);
         model.addAttribute("photo", photo);
+        model.addAttribute("uploadedBy", photo.getUser().getLoginName());
 
         List<PhotoComments> commentsList = photoManager.getPhotoComments(photo);
         model.addAttribute("commentList", commentsList);
         if (!commentsList.isEmpty())
             log.info("com", commentsList.get(0));
 
-        //@todo:check
         double rating = photoManager.getRating(photo);
         model.addAttribute("rating", rating);
 
@@ -74,12 +73,7 @@ public class PhotoDetailsController {
 
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("User");
-        log.info("name", user.getLoginName());
         Photo photo = (Photo) session.getAttribute("Photo");
-        log.info("caption", photo.getCaption());
-
-        photo.setRating(photoReviewCmd.getRating());
-        photoManager.savePhoto(photo);
 
         String isComment = ServletRequestUtils.getStringParameter(request, "comment", null);
         String isRating = ServletRequestUtils.getStringParameter(request, "rate", null);
@@ -106,18 +100,19 @@ public class PhotoDetailsController {
         }
 
         if (isRating != null) {
-            if (photoReviewCmd.getRating() != 0) {
-                log.info("formRating!!!", photoReviewCmd.getRating());
+            log.info("formRating!!!", photoReviewCmd.getRating());
+            if (!photoManager.isDoubleRating(photo, user)) {
                 PhotoRating photoRating = new PhotoRating(photoReviewCmd.getRating());
                 photoRating.setRatedBy(user);
                 photoRating.setPhoto(photo);
                 photoManager.saveRating(photoRating);
-            }
+            } else
+                model.addAttribute("error", "You Have Been Rated on this Photo Already!!!");
         }
 
-        model.addAttribute("loginName", user.getLoginName());
         model.addAttribute("userId", user.getUserId());
         model.addAttribute("photo", photo);
+        model.addAttribute("uploadedBy", photo.getUser().getLoginName());
 
         List<PhotoComments> commentsList = photoManager.getPhotoComments(photo);
         if (!commentsList.isEmpty())
@@ -125,7 +120,6 @@ public class PhotoDetailsController {
         model.addAttribute("commentList", commentsList);
         model.addAttribute("photoReview", photoReviewCmd);
 
-        //@todo:check
         double rating = photoManager.getRating(photo);
         model.addAttribute("rating", rating);
 

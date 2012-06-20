@@ -83,4 +83,8 @@ public class PhotoManagerImpl implements PhotoManager {
         log.info("photomanager: in get rating");
         return photoRatingDao.getRating(photo);
     }
+
+    public boolean isDoubleRating(Photo photo, User user) {
+        return photoRatingDao.isDoubleRating(photo, user);
+    }
 }

@@ -22,7 +22,6 @@ public class UserCmd {
     private String country;
     private String gender;
     private String description;
-
     private MultipartFile profilePicThumbnail;
 
     public UserCmd() {

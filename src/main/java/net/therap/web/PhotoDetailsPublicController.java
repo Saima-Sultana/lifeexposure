@@ -1,10 +1,7 @@
 package net.therap.web;
 
-import net.therap.command.PhotoReviewCmd;
 import net.therap.domain.Photo;
 import net.therap.domain.PhotoComments;
-import net.therap.domain.PhotoRating;
-import net.therap.domain.User;
 import net.therap.service.PhotoManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,14 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.ServletRequestUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,7 +44,6 @@ public class PhotoDetailsPublicController {
         if (!commentsList.isEmpty())
             log.info("com", commentsList.get(0));
 
-        //@todo:check
         double rating = photoManager.getRating(photo);
         model.addAttribute("rating", rating);
 

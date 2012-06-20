@@ -64,56 +64,77 @@
             </td>
         </tr>
         <tr>
-            <c:if test="${empty User}">
-                <td>
-                    <form:form method="POST" commandName="loginForm">
-                        <fieldset>
-                            <legend>LogIn</legend>
-                            <table width="100%" align="right">
-                                <tr>
-                                    <td>User Name:</td>
-                                    <td><form:input path="userName"/></td>
-                                    <td><form:errors path="userName" cssClass="error"/></td>
-                                </tr>
-                                <tr>
-                                    <td>Password:</td>
-                                    <td><form:password path="password"/></td>
-                                    <td><form:errors path="password" cssClass="error"/></td>
-                                </tr>
-                            </table>
-                        </fieldset>
-                        <br>
-                        <input type="submit" align="right" value="Submit">
-                    </form:form>
-                </td>
-            </c:if>
             <td width="50px">
                 &nbsp;
             </td>
             <td>
-                <div id="makeMeScrollable" align="center">
-                    <c:forEach var="entry" items="${photoList}">
-                        <c:if test="${empty User}">
-                        <a href="photodetailspublic.html?photoId=${entry.photoId}">
-                            <img src="image/photoimage.html?photoId=${entry.photoId}" alt="Demo image"/>
-                        </a>
-                        </c:if>
-                        <c:if test="${not empty User}">
-                        <a href="photodetails.html?photoId=${entry.photoId}">
-                            <img src="image/photoimage.html?photoId=${entry.photoId}" alt="Demo image"/>
-                        </a>
-                        </c:if>
-                    </c:forEach>
-                </div>
+                <table>
+                    <tr>
+                        <td>
+                            <b><big>All public photos</big></b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="makeMeScrollable" align="center">
+                            <c:forEach var="entry" items="${photoList}">
+                                <c:if test="${empty User}">
+                                    <a href="photodetailspublic.html?photoId=${entry.photoId}">
+                                        <img src="image/photoimage.html?photoId=${entry.photoId}" alt="Demo image"/>
+                                    </a>
+                                </c:if>
+                                <c:if test="${not empty User}">
+                                    <a href="photodetails.html?photoId=${entry.photoId}">
+                                        <img src="image/photoimage.html?photoId=${entry.photoId}" alt="Demo image"/>
+                                    </a>
+                                </c:if>
+                            </c:forEach>
+                        </div>
+                        </td>
+                    </tr>
+                </table>
             </td>
-        </tr>
-        <tr align="left">
-            <td><a href="newuser.html">Sign Up</a></td>
+            <td width="50px">
+                &nbsp;
+            </td>
+            <td>
+                <c:if test="${empty User}">
+                    <table>
+                        <tr>
+                            <td>
+                                <form:form method="POST" commandName="loginForm">
+                                    <fieldset>
+                                        <legend>LogIn</legend>
+                                        <table width="100%" align="right">
+                                            <tr>
+                                                <td>User Name:</td>
+                                                <td><form:input path="userName"/></td>
+                                                <td><form:errors path="userName" cssClass="error"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Password:</td>
+                                                <td><form:password path="password"/></td>
+                                                <td><form:errors path="password" cssClass="error"/></td>
+                                            </tr>
+                                        </table>
+                                    </fieldset>
+                                    <br>
+                                    <input type="submit" align="right" value="Submit">
+                                </form:form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="newuser.html">Sign Up</a>
+                            </td>
+                        </tr>
+                    </table>
+                </c:if>
+            </td>
         </tr>
     </table>
 
-<div id="reference" style="width: 1px; height: 1px;"></div>
-
+    <div id="reference" style="width: 1px; height: 1px;"></div>
 </body>
 
 </html>

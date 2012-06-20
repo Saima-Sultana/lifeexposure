@@ -21,6 +21,7 @@ import java.util.Date;
  */
 @Service("UserManager")
 public class UserManagerImpl implements UserManager {
+
     @Autowired
     private UserDao userDao;
 

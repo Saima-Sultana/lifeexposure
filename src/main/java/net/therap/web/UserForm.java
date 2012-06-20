@@ -79,6 +79,7 @@ public class UserForm {
     public String processEditForm(@ModelAttribute("editUser") UserCmd userCmd, BindingResult result,
                                   ModelMap model, HttpServletRequest request, HttpServletResponse response,
                                   @RequestParam("file") MultipartFile file) {
+        //@todo validation checking
         log.info("after validation");
         userCmd.setProfilePicThumbnail(file);
         HttpSession session = request.getSession(false);

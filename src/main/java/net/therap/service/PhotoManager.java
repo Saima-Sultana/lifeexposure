@@ -24,4 +24,5 @@ public interface PhotoManager {
     public byte[] getPhotoImage(long photoId) throws Exception;
     public void saveRating(PhotoRating photoRating);
     public double getRating(Photo photo);
+    public boolean isDoubleRating(Photo photo, User user);
 }

@@ -2,7 +2,7 @@ package net.therap.dao;
 
 import net.therap.domain.Photo;
 import net.therap.domain.PhotoRating;
-import org.hibernate.Query;
+import net.therap.domain.User;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,39 +21,27 @@ public class PhotoRatingDao extends HibernateDaoSupport {
     private static final Logger log = LoggerFactory.getLogger(PhotoRatingDao.class);
 
     public void saveRating(PhotoRating photoRating) {
-        log.info("PhotoRatingDao: in saveRating");
         Session session = getSession();
         session.saveOrUpdate(photoRating);
         session.flush();
     }
 
     public double getRating(Photo photo) {
-        log.info("PhotoRatingDao: in getting ratings");
-
-/*        String query = "FROM PhotoRating photoRating WHERE photoRating.photo = :photoObj";
-        List<PhotoRating> ratingList = this.getHibernateTemplate().findByNamedParam(query, "photoObj", photo);*//*
-
-        String query = "SELECT AVG(photoRating.rating) from PhotoRating photoRating WHERE photoRating.photo = :photoObj";
-        List<Double> avgRatingList = this.getHibernateTemplate().findByNamedParam(query, "photoObj", photo);
-        if(avgRatingList == null) {
-          return 0;
-        }
-        log.info("ListSize:", avgRatingList.size());
-        double avgRating = avgRatingList.get(0);
-        return (float)avgRating;*/
         String query = "FROM PhotoRating photoRating WHERE photoRating.photo = :photoObj";
         List<PhotoRating> ratingList = this.getHibernateTemplate().findByNamedParam(query, "photoObj", photo);
 
         if (ratingList.isEmpty())
             return 0;
         else {
-            Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-            Query query1 = session.createQuery("SELECT AVG(photoRating.rating) from PhotoRating as photoRating WHERE photoRating.photo = :photoObj");
-            query1.setParameter("photoObj", photo);
-            return ((Double) query1.iterate().next()).doubleValue();
-
-            //return (avgRatingList.size() == 0) ? 0 : avgRatingList.get(0);
+            String sql = "SELECT AVG(photoRating.rating) FROM PhotoRating AS photoRating WHERE photoRating.photo = ?";
+            List result = this.getHibernateTemplate().find(sql, photo);
+            return (Double) result.get(0);
         }
+    }
 
+    public boolean isDoubleRating(Photo photo, User user) {
+        String sql = "SELECT COUNT(*) from PhotoRating as photoRating WHERE photoRating.photo = ? AND photoRating.ratedBy = ?";
+        List result = this.getHibernateTemplate().find(sql, photo, user);
+        return (Long)result.get(0) > 0;
     }
 }

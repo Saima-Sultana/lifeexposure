@@ -16,6 +16,7 @@ import java.util.List;
  */
 public interface PhotoManager {
     public void savePhoto(Photo photo);
+    public void updatePhoto(Photo photo);
     public Photo getPhoto(long id);
     public List<Photo> getPhotos(User user);
     public List<Photo> getAllPhotos();

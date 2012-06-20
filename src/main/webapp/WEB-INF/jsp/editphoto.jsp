@@ -4,6 +4,11 @@
 <html>
 
 <head>
+    <script language="javascript">
+        function returnHome() {
+            document.location.href = "photodetails.html?photoId=${photo.photoId}"
+        }
+    </script>
 </head>
 
 <body>
@@ -18,27 +23,40 @@
                 </td>
             </tr>
         </table>
-        <fieldset>
-            <legend>Photo Details</legend>
-            <table bgcolor="f8f8ff" border="0" cellspacing="0" cellpadding="5">
-                <tr>
-                    <td>Add a caption:</td>
-                    <td><form:input path="caption"/></td>
-                    <td><form:errors path="caption" cssClass="error"/></td>
-                </tr>
-                <tr>
-                    <td>Location: (optional)</td>
-                    <td><form:input path="location"/></td>
-                </tr>
-                <tr>
-                    <td>Description: (optional)</td>
-                    <td><form:input path="description"/></td>
-                </tr>
-            </table>
-        </fieldset>
-        <br>
-        <input type="submit" align="right" value="Ok">
-        <input type="button" align="right" value="Cancel" onClick="returnHome()">
+        <table>
+            <tr>
+                <td>
+                    <img src="image/photoimage.html?photoId=${photo.photoId}" alt="photo" border="0"/>
+                </td>
+                <td width="=50px">
+                    &nbsp;
+                </td>
+                <td>
+                    <fieldset>
+                        <legend>Photo Details</legend>
+                        <table bgcolor="f8f8ff" border="0" cellspacing="0" cellpadding="5">
+                            <tr>
+                                <td>Add a caption:</td>
+                                <td><form:input path="caption"/></td>
+                                <td><form:errors path="caption" cssClass="error"/></td>
+                            </tr>
+                            <tr>
+                                <td>Location: (optional)</td>
+                                <td><form:input path="location"/></td>
+                            </tr>
+                            <tr>
+                                <td>Description: (optional)</td>
+                                <td><form:input path="description"/></td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                    <br>
+                    <input type="submit" align="right" value="Ok">
+                    <input type="button" align="right" value="Cancel" onClick="returnHome()">
+                </td>
+            </tr>
+        </table>
+
     </form:form>
 </body>
 

@@ -39,6 +39,10 @@ public class PhotoManagerImpl implements PhotoManager {
         photoDao.savePhoto(photo);
     }
 
+    public void updatePhoto(Photo photo) {
+        photoDao.updatePhoto(photo);
+    }
+
     public Photo getPhoto(long id) {
         return (Photo) photoDao.getPhoto(id);
     }

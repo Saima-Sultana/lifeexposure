@@ -19,6 +19,12 @@ public class PhotoCmd {
     public PhotoCmd() {
     }
 
+    public PhotoCmd(String caption, String location, String description) {
+        this.caption = caption;
+        this.location = location;
+        this.description = description;
+    }
+
     public MultipartFile getPhoto() {
         return photo;
     }

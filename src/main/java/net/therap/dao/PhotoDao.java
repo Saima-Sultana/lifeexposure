@@ -23,7 +23,16 @@ public class PhotoDao extends HibernateDaoSupport {
     public void savePhoto(Photo photo) {
         log.info("in savePhoto");
         Session session = getSession();
-        session.saveOrUpdate(photo);
+        session.save(photo);
+        session.flush();
+/*        //for checking transaction
+        throw new RuntimeException();*/
+    }
+
+    public void updatePhoto(Photo photo) {
+        log.info("in savePhoto");
+        Session session = getSession();
+        session.update(photo);
         session.flush();
 /*        //for checking transaction
         throw new RuntimeException();*/

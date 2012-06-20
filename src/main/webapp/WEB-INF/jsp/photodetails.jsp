@@ -35,6 +35,13 @@
             <td>
                 <table>
                     <tr>
+                        <td align="left">
+                            <c:if test="${user.userId==photo.user.userId}">
+                                <a href="editphoto.html?photoId=${photo.photoId}">Edit</a>
+                            </c:if>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>
                             <img src="image/photoimage.html?photoId=${photo.photoId}" alt="photo" border="0"/>
                         </td>
@@ -63,11 +70,11 @@
                 <table bgcolor="f8f8ff" border="0" cellspacing="0" cellpadding="5">
                     <tr>
                         <td width="70" height="70">
-                            <img src="image/userimage.html?userId=${userId}" alt="Header image" width="60" height="60"
+                            <img src="image/userimage.html?userId=${photo.user.userId}" alt="Header image" width="60" height="60"
                                  border="0"/>
                         </td>
                         <td>
-                            <b><big>Uploaded by ${uploadedBy} </big></b>
+                            <b><big>Uploaded by ${photo.user.loginName} </big></b>
                         </td>
                     </tr>
                 </table>

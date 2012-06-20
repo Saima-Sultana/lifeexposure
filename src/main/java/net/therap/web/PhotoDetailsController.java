@@ -46,7 +46,7 @@ public class PhotoDetailsController {
             return "redirect:loginform.html";
         }
         User user = (User) session.getAttribute("User");
-        model.addAttribute("userId", user.getUserId());
+        model.addAttribute("user", user);
 
         long photoId = ServletRequestUtils.getLongParameter(request, "photoId", -1);
         Photo photo = photoManager.getPhoto(photoId);
@@ -57,7 +57,6 @@ public class PhotoDetailsController {
         }
         session.setAttribute("Photo", photo);
         model.addAttribute("photo", photo);
-        model.addAttribute("uploadedBy", photo.getUser().getLoginName());
 
         List<PhotoComments> commentsList = photoManager.getPhotoComments(photo);
         model.addAttribute("commentList", commentsList);
@@ -115,9 +114,8 @@ public class PhotoDetailsController {
                 model.addAttribute("error", "You Have Been Rated on this Photo Already!!!");
         }
 
-        model.addAttribute("userId", user.getUserId());
+        model.addAttribute("user", user);
         model.addAttribute("photo", photo);
-        model.addAttribute("uploadedBy", photo.getUser().getLoginName());
 
         List<PhotoComments> commentsList = photoManager.getPhotoComments(photo);
         if (!commentsList.isEmpty())

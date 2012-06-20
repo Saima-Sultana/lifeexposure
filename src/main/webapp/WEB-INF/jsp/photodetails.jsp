@@ -44,35 +44,14 @@
                             <b>${photo.caption}</b>
                         </td>
                     </tr>
-                    <c:if test="${not empty photo.description} ">
-                        <tr>
-                            <td class="tableText">
-                                ${photo.description}
-                            </td>
-                        </tr>
-                    </c:if>
-                    <c:if test="${not empty photo.location} ">
-                        <tr>
-                            <td class="tableText">
-                                Location: ${photo.location}
-                            </td>
-                        </tr>
-                    </c:if>
                     <tr>
-                        <td>Rating:</td>
-                        <td>${rating}</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <form:hidden id="rating" path="rating"/>
-                        </td>
-                        <td>
-                            <input type="submit" value="Rate" name="rate">
+                        <td class="tableText">
+                            ${photo.description}
                         </td>
                     </tr>
                     <tr>
-                        <td class="error">
-                            ${error}
+                        <td class="tableText">
+                            Location: ${photo.location}
                         </td>
                     </tr>
                 </table>
@@ -91,22 +70,45 @@
                             <b><big>Uploaded by ${uploadedBy} </big></b>
                         </td>
                     </tr>
+                </table>
+                <table>
                     <tr>
                         <td height="20px">
                             &nbsp;
                         </td>
                     </tr>
+                    <tr>
+                        <td>Rating: ${rating}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form:hidden id="rating" path="rating"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" value="Rate" name="rate">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="error">
+                            ${error}
+                        </td>
+                    </tr>
                 </table>
-                <table bgcolor="f8f8ff" border="3" bordercolor = "#ffffff" cellspacing="0" cellpadding="5" title="Photo Comments" >
-                    <c:if test="${not empty commentList}">
-                        <c:forEach var="comment" items="${commentList}">
-                            <tr>
-                                <td class="tableText">${comment.commentedBy.loginName}</td>
-                                <td>${comment.photoComment}</td>
-                            </tr>
-                        </c:forEach>
-                    </c:if>
-                </table>
+                <c:if test="${not empty commentList}">
+                    <fieldset>
+                        <legend>Photo Comments</legend>
+                        <table bgcolor="f8f8ff" border="0" cellspacing="0" cellpadding="5">
+                            <c:forEach var="comment" items="${commentList}">
+                                <tr>
+                                    <td class="tableText">${comment.commentedBy.loginName}</td>
+                                    <td>${comment.photoComment}</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </fieldset>
+                </c:if>
                 <br>
                 <br>
                 <table>

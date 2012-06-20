@@ -15,7 +15,6 @@ public class PhotoCmd {
     private String caption;
     private String location;
     private String description;
-    private int views = 0;
 
     public PhotoCmd() {
     }
@@ -58,13 +57,5 @@ public class PhotoCmd {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getViews() {
-        return views;
-    }
-
-    public void setViews(int views) {
-        this.views = views;
     }
 }

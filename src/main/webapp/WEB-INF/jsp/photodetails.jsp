@@ -78,6 +78,11 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>
+                            Views: ${photo.views}
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Rating: ${rating}</td>
                     </tr>
                     <tr>
@@ -96,6 +101,8 @@
                         </td>
                     </tr>
                 </table>
+                <br>
+                <br>
                 <c:if test="${not empty commentList}">
                     <fieldset>
                         <legend>Photo Comments</legend>

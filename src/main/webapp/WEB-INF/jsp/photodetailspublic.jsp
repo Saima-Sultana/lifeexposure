@@ -4,24 +4,59 @@
 <html>
 
 <head>
+    <link href='<c:url value="/rating/rating_simple.css"/>' rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" src='<c:url value="/rating/jquery.js"/>'></script>
+    <script type="text/javascript" src='<c:url value="/rating/rating_simple.js"/>'></script>
+    <script language="javascript" type="text/javascript">
+        function test(value) {
+            alert("This rating's value is " + value);
+        }
+        $(function () {
+            $("#rating").webwidget_rating_simple({
+                rating_star_length:'5',
+                rating_initial_value:'0',
+                rating_function_name:'', //this is function name for click
+                directory:'rating/'
+            });
+        });
+    </script>
 </head>
 
 <body>
     <table>
         <tr>
-            <td align="left">
+            <td height="50px">
+               &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <table>
                     <tr>
                         <td>
                             <img src="image/photoimage.html?photoId=${photo.photoId}" alt="photo" border="0"/>
                         </td>
                     </tr>
-                    <td>
-                            ${photo.caption}
-                    </td>
+                    <tr>
+                        <td>
+                            <b>${photo.caption}</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tableText">
+                            ${photo.description}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tableText">
+                            Location: ${photo.location}
+                        </td>
+                    </tr>
                 </table>
             </td>
-            <td width="100%">
+            <td width="50px">
+                &nbsp;
             </td>
             <td>
                 <table bgcolor="f8f8ff" border="0" cellspacing="0" cellpadding="5">
@@ -34,28 +69,37 @@
                             <b><big>Uploaded by ${photo.user.loginName} </big></b>
                         </td>
                     </tr>
-                    <br>
-                    <br>
+                </table>
+                <table>
                     <tr>
-                        <c:if test="${not empty commentList}">
-                            <fieldset>
-                                <legend>Photo Comments</legend>
-                                <c:forEach var="comment" items="${commentList}">
-                                    <tr>
-                                        <td>${comment.commentedBy.loginName}</td>
-                                        <td>${comment.photoComment}</td>
-                                    </tr>
-                                </c:forEach>
-                            </fieldset>
-                        </c:if>
+                        <td height="20px">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Views: ${photo.views}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Rating: ${rating}</td>
                     </tr>
                 </table>
                 <br>
-                <table>
-                        <td>rating:</td>
-                        <td>${rating}</td>
-                    </tr>
-                </table>
+                <br>
+                <c:if test="${not empty commentList}">
+                    <fieldset>
+                        <legend>Photo Comments</legend>
+                        <table bgcolor="f8f8ff" border="0" cellspacing="0" cellpadding="5">
+                            <c:forEach var="comment" items="${commentList}">
+                                <tr>
+                                    <td class="tableText">${comment.commentedBy.loginName}</td>
+                                    <td>${comment.photoComment}</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </fieldset>
+                </c:if>
             </td>
         </tr>
     </table>

@@ -37,6 +37,9 @@ public class PhotoDetailsPublicController {
 
         long photoId = ServletRequestUtils.getLongParameter(request, "photoId", -1);
         Photo photo = photoManager.getPhoto(photoId);
+        int views = photo.getViews();
+        photo.setViews(++views);
+        photoManager.savePhoto(photo);
         model.addAttribute("photo", photo);
 
         List<PhotoComments> commentsList = photoManager.getPhotoComments(photo);

@@ -50,6 +50,11 @@ public class PhotoDetailsController {
 
         long photoId = ServletRequestUtils.getLongParameter(request, "photoId", -1);
         Photo photo = photoManager.getPhoto(photoId);
+        if(user.getUserId() != photo.getUser().getUserId()) {
+            int views = photo.getViews();
+            photo.setViews(++views);
+            photoManager.savePhoto(photo);
+        }
         session.setAttribute("Photo", photo);
         model.addAttribute("photo", photo);
         model.addAttribute("uploadedBy", photo.getUser().getLoginName());
@@ -125,4 +130,6 @@ public class PhotoDetailsController {
 
         return "photodetails";
     }
+
+
 }

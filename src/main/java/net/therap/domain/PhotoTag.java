@@ -1,7 +1,6 @@
 package net.therap.domain;
 
 import javax.persistence.*;
-import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.

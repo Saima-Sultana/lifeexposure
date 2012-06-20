@@ -3,7 +3,6 @@ package net.therap.web;
 import net.therap.command.UserCmd;
 import net.therap.domain.User;
 import net.therap.service.UserManager;
-import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.*;
-import java.sql.Blob;
 
 /**
  * Created by IntelliJ IDEA.

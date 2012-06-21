@@ -13,7 +13,7 @@
         function Validate() {
             var image = document.getElementById("image").value;
             if (image == '') {
-                alert("Please select a file.");
+                alert("Please select a photo.");
                 document.getElementById("image").focus();
                 return false;
             }
@@ -60,6 +60,16 @@
                 <tr>
                     <td>Description: (optional)</td>
                     <td><form:input path="description"/></td>
+                </tr>
+                <tr>
+                    <td>Tag: (optional)</td>
+                    <td>
+                        <form:select path="tag">
+                            <c:forEach var="photoTag" items="${photoTagList}">
+                                <form:option value="${photoTag.tag}" label="${photoTag.tag}"/>
+                            </c:forEach>
+                        </form:select>
+                    </td>
                 </tr>
             </table>
         </fieldset>

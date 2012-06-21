@@ -62,6 +62,8 @@ public class LoginForm {
         loginValidator.validate(loginForm, result);
 
         if (result.hasErrors()) {
+            List<Photo> photoList = photoManager.getAllPhotos();
+            model.addAttribute("photoList", photoList);
             model.addAttribute("loginForm", loginForm);
             return "loginform";
         }

@@ -47,15 +47,14 @@
     </bean>
 
     <aop:config>
-        <aop:pointcut id="serviceOperation" expression="execution(* net.therap.service.*.*(..))"/>
+        <aop:pointcut id="serviceOperation" expression="execution(* net.therap.service.*Manager.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation"/>
     </aop:config>
 
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="save*" propagation="REQUIRED" read-only="false"/>
-            <tx:method name="update*" propagation="REQUIRED" read-only="false"/>
-            <tx:method name="*"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
 

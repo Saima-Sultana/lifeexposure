@@ -58,43 +58,57 @@
 </head>
 
 <body>
-<table bottom:100 right:10>
-    <tr>
-        <td width="70" height="70">
-            <img src="image/userimage.html?userId=${userId}" alt="Header image" width="60" height="60" border="0"/>
-        </td>
-        <td>
-            <b><big>Hi! ${loginName} </big></b>
-        </td>
-    </tr>
-</table>
+    <table bottom:100 right:10>
+        <tr>
+            <td width="70" height="70">
+                <img src="image/userimage.html?userId=${userId}" alt="Header image" width="60" height="60" border="0"/>
+            </td>
+            <td>
+                <b><big>Hi! ${loginName} </big></b>
+            </td>
+        </tr>
+    </table>
 
-<c:if test="${not empty photoList}">
     <table>
         <tr>
             <td height="50px">
                 &nbsp;
             </td>
         </tr>
-        <tr>
-            <td width="250px">
-                &nbsp;
-            </td>
-            <td>
-                <div id="makeMeScrollable" align="center">
-                    <c:forEach var="entry" items="${photoList}">
-                        <a href="photodetails.html?photoId=${entry.photoId}">
-                            <img src="image/photoimage.html?photoId=${entry.photoId}" alt="Demo image"/>
-                        </a>
-                    </c:forEach>
-                </div>
-            </td>
-        </tr>
+        <c:if test="${empty photoList}">
+            <tr>
+                <td>
+                    Start uploading your photo in LifeExposure!
+                </td>
+            </tr>
+        </c:if>
+        <c:if test="${not empty photoList}">
+            <tr>
+                <td width="250px">
+                    &nbsp;
+                </td>
+                <td>
+                    <div id="makeMeScrollable" align="center">
+                        <c:forEach var="entry" items="${photoList}">
+                            <a href="photodetails.html?photoId=${entry.photoId}">
+                                <img src="image/photoimage.html?photoId=${entry.photoId}" alt="Demo image"/>
+                            </a>
+                        </c:forEach>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="250px">
+                    &nbsp;
+                </td>
+                <td>
+                    Click any photo to see its details.
+                </td>
+            </tr>
+        </c:if>
     </table>
 
-</c:if>
-
-<div id="reference" style="width: 1px; height: 1px;"></div>
+    <div id="reference" style="width: 1px; height: 1px;"></div>
 </body>
 
 </html>

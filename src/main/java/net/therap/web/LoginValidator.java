@@ -31,8 +31,8 @@ public class LoginValidator implements Validator {
     }
 
     public void validate(Object obj, Errors errors) {
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "required", "User Name is required.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required", "Password is required.");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "required.username");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required.password");
 
         LoginCmd loginCmd = (LoginCmd) obj;
 
@@ -40,10 +40,10 @@ public class LoginValidator implements Validator {
         User user =  userManager.getUserByLoginName(loginCmd.getUserName());
 
         if(user == null) {
-            errors.rejectValue("userName", "required", "User Name is incorrect.");
+            errors.rejectValue("userName", "incorrect.username");
         }
         else if(!loginCmd.getPassword().equals(user.getPassword())) {
-            errors.rejectValue("password", "required", "Password is incorrect.");
+            errors.rejectValue("password", "incorrect.password");
         }
     }
 }

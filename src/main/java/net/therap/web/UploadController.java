@@ -2,6 +2,7 @@ package net.therap.web;
 
 import net.therap.command.PhotoCmd;
 import net.therap.domain.Photo;
+import net.therap.domain.PhotoTag;
 import net.therap.domain.User;
 import net.therap.service.PhotoManager;
 import org.hibernate.Hibernate;
@@ -20,6 +21,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Blob;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -52,6 +55,7 @@ public class UploadController {
         model.addAttribute("loginName", user.getLoginName());
         model.addAttribute("userId", user.getUserId());
         model.addAttribute("photoCmd", photoCmd);
+        model.addAttribute("photoTagList", photoManager.getAllTags());
         return "upload";
     }
 
@@ -60,7 +64,7 @@ public class UploadController {
                               ModelMap model, HttpServletRequest request, HttpServletResponse response,
                               @RequestParam("file") MultipartFile file) {
 
-        log.info("in post upload");
+        log.info("in post uploaddddd");
         photoCmd.setPhoto(file);
         photoValidator.validate(photoCmd, result);
 
@@ -85,9 +89,10 @@ public class UploadController {
             }
         }
 
-        Photo photo = new Photo(photoCmd.getCaption(), photoCmd.getLocation(), photoCmd.getDescription());
-        log.info("after file write");
-
+        PhotoTag photoTag = photoManager.getPhotoTagObj(photoCmd.getTag());
+        Set<PhotoTag> photoTags = new HashSet<PhotoTag>();
+        photoTags.add(photoTag);
+        Photo photo = new Photo(photoCmd.getCaption(), photoCmd.getLocation(), photoCmd.getDescription(), photoTags);
         photo.setPhoto(blob);
         photo.setUser(user);
         photo.setUploadDate(new Date());

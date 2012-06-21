@@ -47,7 +47,8 @@ public class UserManagerImpl implements UserManager {
     }
 
     public void updateUser(User user, UserCmd userCmd) {
-        user.setPassword(userCmd.getPassword());
+        if (userCmd.getPassword().trim() != null)
+            user.setPassword(userCmd.getPassword());
         user.setFirstName(userCmd.getFirstName());
         user.setLastName(userCmd.getLastName());
         if (userCmd.getBirthDate() != null)
@@ -67,7 +68,7 @@ public class UserManagerImpl implements UserManager {
         }
         user.setProfilePicThumbnail(blob);
 
-        userDao.saveUser(user);
+        userDao.updateUser(user);
     }
 
     public User getUser(long id) {
@@ -82,7 +83,7 @@ public class UserManagerImpl implements UserManager {
         Blob imageData = userDao.getUserImage(userId);
 
         if (imageData == null) {
-            throw new Exception();
+            return null;
         }
 
         byte[] bytes = new byte[(int) imageData.length()];

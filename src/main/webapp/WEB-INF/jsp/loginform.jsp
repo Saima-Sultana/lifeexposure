@@ -92,6 +92,11 @@
                         </div>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            Click any photo to see its details.
+                        </td>
+                    </tr>
                 </table>
             </td>
             <td width="50px">

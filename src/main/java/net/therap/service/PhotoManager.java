@@ -1,9 +1,6 @@
 package net.therap.service;
 
-import net.therap.domain.Photo;
-import net.therap.domain.PhotoComments;
-import net.therap.domain.PhotoRating;
-import net.therap.domain.User;
+import net.therap.domain.*;
 
 import java.util.List;
 
@@ -26,4 +23,6 @@ public interface PhotoManager {
     public void saveRating(PhotoRating photoRating);
     public double getRating(Photo photo);
     public boolean isDoubleRating(Photo photo, User user);
+    public List<PhotoTag> getAllTags();
+    public PhotoTag getPhotoTagObj(String tag);
 }

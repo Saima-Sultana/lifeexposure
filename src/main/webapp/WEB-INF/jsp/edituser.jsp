@@ -19,7 +19,7 @@
         function Validate() {
             var image = document.getElementById("image").value;
             if (image == '') {
-                alert("Please select a file.");
+                alert("Please select a profile picture.");
                 document.getElementById("image").focus();
                 return false;
             }
@@ -46,7 +46,7 @@
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><form:password path="password"/></td>
+                <td><form:input path="password"/></td>
                 <td><form:errors path="password" cssClass="error"/></td>
             </tr>
             <tr>

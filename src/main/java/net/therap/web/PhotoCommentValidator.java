@@ -1,6 +1,8 @@
 package net.therap.web;
 
 import net.therap.command.PhotoCmd;
+import net.therap.command.PhotoReviewCmd;
+import net.therap.command.UserCmd;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -11,19 +13,19 @@ import org.springframework.validation.Validator;
 /**
  * Created by IntelliJ IDEA.
  * User: saima
- * Date: 6/12/12
- * Time: 1:05 PM
+ * Date: 6/21/12
+ * Time: 2:55 PM
  * To change this template use File | Settings | File Templates.
  */
-@Component("photoValidator")
-public class PhotoValidator implements Validator {
-    private static final Logger log = LoggerFactory.getLogger(PhotoValidator.class);
+@Component("photoCommentValidator")
+public class PhotoCommentValidator implements Validator {
+    private static final Logger log = LoggerFactory.getLogger(PhotoCommentValidator.class);
 
     public boolean supports(Class candidate) {
-        return PhotoCmd.class.isAssignableFrom(candidate);
+        return PhotoReviewCmd.class.isAssignableFrom(candidate);
     }
 
     public void validate(Object obj, Errors errors) {
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "caption", "required.caption");
+        PhotoReviewCmd photoReviewCmd = (PhotoReviewCmd) obj;
     }
 }

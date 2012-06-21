@@ -15,6 +15,7 @@ public class PhotoCmd {
     private String caption;
     private String location;
     private String description;
+    private String tag;
 
     public PhotoCmd() {
     }
@@ -63,5 +64,13 @@ public class PhotoCmd {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

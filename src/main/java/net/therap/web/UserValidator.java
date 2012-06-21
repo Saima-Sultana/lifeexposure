@@ -25,14 +25,15 @@ public class UserValidator implements Validator {
     }
 
     public void validate(Object obj, Errors errors) {
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "loginName", "required", "Login Name is required.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required", "Password is required.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "required", "First Name is required.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "required", "Last Name is required.");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "loginName", "required.username");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required.password");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "required.firstname");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "required.lastname");
 
         UserCmd user = (UserCmd) obj;
+
         if (!isValidEmail(user.getEmail().trim()))
-            errors.rejectValue("email", "required", "Please give valid Email address.");
+            errors.rejectValue("email", "incorrect.email");
     }
 
     private boolean isValidEmail(String input) {

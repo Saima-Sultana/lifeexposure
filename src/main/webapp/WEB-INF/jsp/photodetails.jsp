@@ -37,7 +37,7 @@
                     <tr>
                         <td align="left">
                             <c:if test="${user.userId==photo.user.userId}">
-                                <a href="editphoto.html?photoId=${photo.photoId}">Edit</a>
+                                <b><big><a href="editphoto.html?photoId=${photo.photoId}">Edit</a></big></b>
                             </c:if>
                         </td>
                     </tr>
@@ -129,6 +129,7 @@
                     <tr>
                         <td>Add comment:</td>
                         <td><form:input path="comment"/></td>
+                        <td><form:errors path="comment" cssClass="error"/></td>
                     </tr>
                     <tr>
                         <td>

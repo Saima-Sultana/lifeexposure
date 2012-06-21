@@ -31,17 +31,18 @@ public class Photo {
     private int views = 0;
     private Set<PhotoComments> photoCommentsSet;
     private Set<PhotoRating> photoRatingSet;
-    private Set<PhotoTag> photoTags = new HashSet<PhotoTag>(0);    ////many to many
+    private Set<PhotoTag> photoTags = new HashSet<PhotoTag>(0);
     /*private PhotoDetails photoDetails;*/
     private long version;
 
     public Photo() {
     }
 
-    public Photo(String caption, String location, String description) {
+    public Photo(String caption, String location, String description, Set<PhotoTag> photoTags) {
         this.caption = caption;
         this.location = location;
         this.description = description;
+        this.photoTags = photoTags;
     }
 
     @Id

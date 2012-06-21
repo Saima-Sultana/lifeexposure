@@ -26,7 +26,9 @@ public class PhotoDao extends HibernateDaoSupport {
         session.save(photo);
         session.flush();
 /*        //for checking transaction
-        throw new RuntimeException();*/
+        if(1==1)
+        throw new RuntimeException();
+        return 1;*/
     }
 
     public void updatePhoto(Photo photo) {

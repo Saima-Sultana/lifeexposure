@@ -37,6 +37,9 @@ public class PhotoDetailsController {
     @Autowired
     private PhotoManager photoManager;
 
+    @Autowired
+    private PhotoCommentValidator photoCommentValidator;
+
     @RequestMapping(method = RequestMethod.GET)
     public String showComment(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         log.info("in pht com get");
@@ -78,12 +81,28 @@ public class PhotoDetailsController {
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("User");
         Photo photo = (Photo) session.getAttribute("Photo");
+        //@todo comment length check
+        /*photoCommentValidator.validate(photoReviewCmd, result);
 
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("User");
+
+        if (result.hasErrors()) {
+            model.addAttribute("loginName", user.getLoginName());
+            model.addAttribute("userId", user.getUserId());
+            model.addAttribute("photoForm", photoCmd);
+            return "upload";
+        }*/
         String isComment = ServletRequestUtils.getStringParameter(request, "comment", null);
         String isRating = ServletRequestUtils.getStringParameter(request, "rate", null);
 
+        log.info("aaaaaaaaaaaaaa",isComment);
+        log.info("aaaaaaaaaaaaaa",isRating);
         if (isComment != null) {
             if (photoReviewCmd.getComment().length() != 0) {
+                int i= photoReviewCmd.getComment().indexOf(",");
+                if( i != -1)
+                    photoReviewCmd.setComment(photoReviewCmd.getComment().substring(0,i));
                 log.info("in post of comment");
                 PhotoComments photoComments = new PhotoComments(photoReviewCmd.getComment());
                 log.info("comment", photoComments.getPhotoComment());
@@ -111,7 +130,7 @@ public class PhotoDetailsController {
                 photoRating.setPhoto(photo);
                 photoManager.saveRating(photoRating);
             } else
-                model.addAttribute("error", "You Have Been Rated on this Photo Already!!!");
+                model.addAttribute("error", "You Have already rate this photo!!!");
         }
 
         model.addAttribute("user", user);
@@ -121,7 +140,8 @@ public class PhotoDetailsController {
         if (!commentsList.isEmpty())
             log.info("com", commentsList.get(0));
         model.addAttribute("commentList", commentsList);
-        model.addAttribute("photoReview", photoReviewCmd);
+        PhotoReviewCmd photoReviewCmdNew = new PhotoReviewCmd();
+        model.addAttribute("photoReview", photoReviewCmdNew);
 
         double rating = photoManager.getRating(photo);
         model.addAttribute("rating", rating);

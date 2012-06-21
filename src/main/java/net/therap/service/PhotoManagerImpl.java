@@ -3,16 +3,16 @@ package net.therap.service;
 import net.therap.dao.PhotoCommentDao;
 import net.therap.dao.PhotoDao;
 import net.therap.dao.PhotoRatingDao;
-import net.therap.domain.Photo;
-import net.therap.domain.PhotoComments;
-import net.therap.domain.PhotoRating;
-import net.therap.domain.User;
+import net.therap.dao.PhotoTagDao;
+import net.therap.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -34,6 +34,9 @@ public class PhotoManagerImpl implements PhotoManager {
 
     @Autowired
     private PhotoRatingDao photoRatingDao;
+
+    @Autowired
+    private PhotoTagDao photoTagDao;
 
     public void savePhoto(Photo photo) {
         photoDao.savePhoto(photo);
@@ -69,7 +72,7 @@ public class PhotoManagerImpl implements PhotoManager {
         Blob imageData = photoDao.getPhotoImage(photoId);
 
         if (imageData == null) {
-            throw new Exception();
+            return null;
         }
 
         byte[] bytes = new byte[(int) imageData.length()];
@@ -90,5 +93,13 @@ public class PhotoManagerImpl implements PhotoManager {
 
     public boolean isDoubleRating(Photo photo, User user) {
         return photoRatingDao.isDoubleRating(photo, user);
+    }
+
+    public List<PhotoTag> getAllTags() {
+        return photoTagDao.getAllTags();
+    }
+
+    public PhotoTag getPhotoTagObj(String tag) {
+        return photoTagDao.getPhotoTagObj(tag);
     }
 }

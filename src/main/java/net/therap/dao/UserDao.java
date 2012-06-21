@@ -22,7 +22,14 @@ public class UserDao extends HibernateDaoSupport {
     public void saveUser(User user) {
         log.info("in saveUser");
         Session session = getSession();
-        session.saveOrUpdate(user);
+        session.save(user);
+        session.flush();
+    }
+
+    public void updateUser(User user) {
+        log.info("in saveUser");
+        Session session = getSession();
+        session.update(user);
         session.flush();
     }
 

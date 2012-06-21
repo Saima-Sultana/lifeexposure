@@ -25,7 +25,7 @@
         function Validate() {
             var image = document.getElementById("file").value;
             if (image == '') {
-                alert("Please select a file.");
+                alert("Please select a profile picture.");
                 document.getElementById("image").focus();
                 return false;
             }

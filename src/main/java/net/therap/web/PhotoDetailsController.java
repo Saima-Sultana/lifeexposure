@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,9 +37,6 @@ public class PhotoDetailsController {
 
     @Autowired
     private PhotoManager photoManager;
-
-    @Autowired
-    private PhotoCommentValidator photoCommentValidator;
 
     @RequestMapping(method = RequestMethod.GET)
     public String showComment(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
@@ -81,18 +79,7 @@ public class PhotoDetailsController {
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("User");
         Photo photo = (Photo) session.getAttribute("Photo");
-        //@todo comment length check
-        /*photoCommentValidator.validate(photoReviewCmd, result);
 
-        HttpSession session = request.getSession(false);
-        User user = (User) session.getAttribute("User");
-
-        if (result.hasErrors()) {
-            model.addAttribute("loginName", user.getLoginName());
-            model.addAttribute("userId", user.getUserId());
-            model.addAttribute("photoForm", photoCmd);
-            return "upload";
-        }*/
         String isComment = ServletRequestUtils.getStringParameter(request, "comment", null);
         String isRating = ServletRequestUtils.getStringParameter(request, "rate", null);
 

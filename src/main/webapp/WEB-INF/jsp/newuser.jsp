@@ -49,22 +49,22 @@
             <table width="100%" bgcolor="f8f8ff" border="0" cellspacing="0" cellpadding="5">
                 <tr>
                     <td>Login Name:</td>
-                    <td><form:input path="loginName"/></td>
+                    <td><form:input path="loginName" maxlength="255"/></td>
                     <td><form:errors path="loginName" cssClass="error"/></td>
                 </tr>
                 <tr>
                     <td>Password:</td>
-                    <td><form:password path="password"/></td>
+                    <td><form:password path="password" maxlength="255"/></td>
                     <td><form:errors path="password" cssClass="error"/></td>
                 </tr>
                 <tr>
                     <td>First Name:</td>
-                    <td><form:input path="firstName"/></td>
+                    <td><form:input path="firstName" maxlength="255"/></td>
                     <td><form:errors path="firstName" cssClass="error"/></td>
                 </tr>
                 <tr>
                     <td>Last Name:</td>
-                    <td><form:input path="lastName"/></td>
+                    <td><form:input path="lastName" maxlength="255"/></td>
                     <td><form:errors path="lastName" cssClass="error"/></td>
                 </tr>
                 <tr>

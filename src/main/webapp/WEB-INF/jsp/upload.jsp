@@ -50,16 +50,16 @@
                 </tr>
                 <tr>
                     <td>Add a caption:</td>
-                    <td><form:input path="caption"/></td>
+                    <td><form:input path="caption" maxlength="255"/></td>
                     <td><form:errors path="caption" cssClass="error"/></td>
                 </tr>
                 <tr>
                     <td>Location: (optional)</td>
-                    <td><form:input path="location"/></td>
+                    <td><form:input path="location" maxlength="255"/></td>
                 </tr>
                 <tr>
                     <td>Description: (optional)</td>
-                    <td><form:input path="description"/></td>
+                    <td><form:input path="description" maxlength="255"/></td>
                 </tr>
                 <tr>
                     <td>Tag: (optional)</td>

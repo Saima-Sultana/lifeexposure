@@ -128,7 +128,7 @@
                 <table>
                     <tr>
                         <td>Add comment:</td>
-                        <td><form:input path="comment"/></td>
+                        <td><form:input path="comment" maxlength="255"/></td>
                         <td><form:errors path="comment" cssClass="error"/></td>
                     </tr>
                     <tr>

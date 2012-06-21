@@ -46,17 +46,17 @@
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><form:input path="password"/></td>
+                <td><form:input path="password"  maxlength="255"/></td>
                 <td><form:errors path="password" cssClass="error"/></td>
             </tr>
             <tr>
                 <td>First Name:</td>
-                <td><form:input path="firstName"/></td>
+                <td><form:input path="firstName"  maxlength="255"/></td>
                 <td><form:errors path="firstName" cssClass="error"/></td>
             </tr>
             <tr>
                 <td>Last Name:</td>
-                <td><form:input path="lastName"/></td>
+                <td><form:input path="lastName"  maxlength="255"/></td>
                 <td><form:errors path="lastName" cssClass="error"/></td>
             </tr>
             <tr>

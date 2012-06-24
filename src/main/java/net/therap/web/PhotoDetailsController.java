@@ -1,10 +1,7 @@
 package net.therap.web;
 
 import net.therap.command.PhotoReviewCmd;
-import net.therap.domain.Photo;
-import net.therap.domain.PhotoComments;
-import net.therap.domain.PhotoRating;
-import net.therap.domain.User;
+import net.therap.domain.*;
 import net.therap.service.PhotoManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,6 +63,9 @@ public class PhotoDetailsController {
 
         double rating = photoManager.getRating(photo);
         model.addAttribute("rating", rating);
+
+        List<PhotoTag> photoTagList = photoManager.getPhotoTags(photo);
+        model.addAttribute("photoTagList", photoTagList);
 
         PhotoReviewCmd photoReviewCmd = new PhotoReviewCmd();
         model.addAttribute("photoReview", photoReviewCmd);

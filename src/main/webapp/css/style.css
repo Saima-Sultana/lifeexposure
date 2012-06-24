@@ -127,6 +127,11 @@ a:hover {
     font-style: italic;
 }
 
+.required {
+    color: #ff0000;
+    font-weight: bold;
+}
+
 .tableText {
     color: #666666;
     font-style: italic;

@@ -107,6 +107,11 @@
                             ${error}
                         </td>
                     </tr>
+                    <tr>
+                        <c:forEach var="photoTag" items="${photoTagList}">
+                        <td><a href="explore-tags.html">${photoTag.tag}</a></td>
+                        </c:forEach>
+                    </tr>
                 </table>
                 <br>
                 <br>

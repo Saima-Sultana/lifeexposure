@@ -55,6 +55,11 @@
                     <input type="button" align="right" value="Cancel" onClick="returnHome()">
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <b><big><a href="deletephoto.html?photoId=${photo.photoId}">Delete this photo</a></big></b>
+                </td>
+            </tr>
         </table>
     </form:form>
 </body>

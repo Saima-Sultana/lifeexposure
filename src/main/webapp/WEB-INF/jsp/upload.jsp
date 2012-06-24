@@ -49,7 +49,7 @@
                     <td><form:errors path="photo" cssClass="error"/></td>
                 </tr>
                 <tr>
-                    <td>Add a caption:</td>
+                    <td><label class="required"> * </label>Add a caption:</td>
                     <td><form:input path="caption" maxlength="255"/></td>
                     <td><form:errors path="caption" cssClass="error"/></td>
                 </tr>

@@ -25,4 +25,6 @@ public interface PhotoManager {
     public boolean isDoubleRating(Photo photo, User user);
     public List<PhotoTag> getAllTags();
     public PhotoTag getPhotoTagObj(String tag);
+    public List<PhotoTag> getPhotoTags(Photo photo);
+    public void deletePhoto(long photoId);
 }

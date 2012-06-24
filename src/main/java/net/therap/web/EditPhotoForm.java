@@ -94,4 +94,12 @@ public class EditPhotoForm {
         log.info("after upload");
         return "redirect:photodetails.html?photoId=" + photo.getPhotoId();
     }
+
+    @RequestMapping(value="deletephoto.html", method = RequestMethod.GET)
+	public String deletePhoto(ModelMap model, HttpServletRequest request, HttpServletResponse response)
+	{
+		long photoId = ServletRequestUtils.getLongParameter(request, "photoId", -1);
+		photoManager.deletePhoto(photoId);
+		return "redirect:myphotos.html";
+	}
 }

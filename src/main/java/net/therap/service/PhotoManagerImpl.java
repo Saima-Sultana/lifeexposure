@@ -102,4 +102,12 @@ public class PhotoManagerImpl implements PhotoManager {
     public PhotoTag getPhotoTagObj(String tag) {
         return photoTagDao.getPhotoTagObj(tag);
     }
+
+    public List<PhotoTag> getPhotoTags(Photo photo) {
+        return photoTagDao.getPhotoTags(photo);
+    }
+
+    public void deletePhoto(long photoId) {
+        photoDao.deletePhoto(photoId);
+    }
 }

@@ -1,5 +1,6 @@
 package net.therap.dao;
 
+import net.therap.domain.Photo;
 import net.therap.domain.PhotoTag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,5 +29,11 @@ public class PhotoTagDao extends HibernateDaoSupport {
 
         List<PhotoTag> photoTagList = this.getHibernateTemplate().findByNamedParam(query, "tagName", tag);
         return photoTagList.get(0);
+    }
+
+    public List<PhotoTag> getPhotoTags(Photo photo) {
+        String query = "SELECT photo.photoTags FROM Photo photo WHERE photo = :photoObj";
+        List<PhotoTag> photoTagList = this.getHibernateTemplate().findByNamedParam(query, "photoObj", photo);
+        return photoTagList;
     }
 }

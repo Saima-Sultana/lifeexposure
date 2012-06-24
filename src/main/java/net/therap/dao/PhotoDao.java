@@ -67,4 +67,11 @@ public class PhotoDao extends HibernateDaoSupport {
         List<Blob> blobList = this.getHibernateTemplate().findByNamedParam(query, "photo_id", photoId);
         return (blobList.size() == 0) ? null:blobList.get(0);
     }
+
+    public void deletePhoto(long photoId) {
+        Session session = getSession();
+        Photo photo = getPhoto(photoId);
+        session.delete(photo);
+        session.flush();
+    }
 }

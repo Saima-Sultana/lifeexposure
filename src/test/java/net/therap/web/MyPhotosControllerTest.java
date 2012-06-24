@@ -29,7 +29,7 @@ import java.util.List;
 public class MyPhotosControllerTest extends UnitilsTestNG {
 
     @TestedObject
-    private MyPhotosController myPhotosController;
+    private PhotosController myPhotosController;
 
     @InjectIntoByType
     private Mock<PhotoManager> photoManagerMock;

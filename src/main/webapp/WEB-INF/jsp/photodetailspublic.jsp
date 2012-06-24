@@ -34,6 +34,11 @@
             <td>
                 <table>
                     <tr>
+                        <td align="right">
+                            <a href="prevphotopublic.html?photoId=${photo.photoId}">Prev</a> | <a href="nextphotopublic.html?photoId=${photo.photoId}">Next</a>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>
                             <img src="image/photoimage.html?photoId=${photo.photoId}" alt="photo" border="0"/>
                         </td>

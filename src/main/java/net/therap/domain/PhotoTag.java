@@ -1,6 +1,7 @@
 package net.therap.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,6 +15,7 @@ import javax.persistence.*;
 public class PhotoTag {
     private long tagId;
     private String tag;
+    private List<Photo> photoList;
     private long version;
 
     @Id
@@ -35,6 +37,15 @@ public class PhotoTag {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    @ManyToMany(mappedBy = "photoTags")
+    public List<Photo> getPhotoList() {
+        return photoList;
+    }
+
+    public void setPhotoList(List<Photo> photoList) {
+        this.photoList = photoList;
     }
 
     @Version

@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -109,5 +111,17 @@ public class PhotoManagerImpl implements PhotoManager {
 
     public void deletePhoto(long photoId) {
         photoDao.deletePhoto(photoId);
+    }
+
+    public List<Photo> getTaggedPhotos(long photoTagId) {
+        return photoTagDao.getTaggedPhotos(photoTagId);
+    }
+
+    public long getPrevPhoto(long photoId) {
+        return photoDao.getPrevPhoto(photoId);
+    }
+
+    public long getNextPhoto(long photoId) {
+        return photoDao.getNextPhoto(photoId);
     }
 }

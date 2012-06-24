@@ -27,4 +27,7 @@ public interface PhotoManager {
     public PhotoTag getPhotoTagObj(String tag);
     public List<PhotoTag> getPhotoTags(Photo photo);
     public void deletePhoto(long photoId);
+    public List<Photo> getTaggedPhotos(long photoTagId);
+    public long getPrevPhoto(long photoId);
+    public long getNextPhoto(long photoId);
 }

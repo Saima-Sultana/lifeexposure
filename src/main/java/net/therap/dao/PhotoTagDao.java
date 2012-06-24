@@ -24,6 +24,12 @@ public class PhotoTagDao extends HibernateDaoSupport {
         return photoTagList;
     }
 
+    /*public List<PhotoTag> getTags(long photoTagId) {
+        String query = "FROM PhotoTag photoTag WHERE photoTag.photoTagId = :photo_tag_id";
+        List<PhotoTag> photoTagList = this.getHibernateTemplate().findByNamedParam(query, "photo_tag_id", photoTagId);
+        return photoTagList;
+    }*/
+
     public PhotoTag getPhotoTagObj(String tag) {
         String query = "FROM PhotoTag photoTag WHERE photoTag.tag = :tagName";
 
@@ -35,5 +41,11 @@ public class PhotoTagDao extends HibernateDaoSupport {
         String query = "SELECT photo.photoTags FROM Photo photo WHERE photo = :photoObj";
         List<PhotoTag> photoTagList = this.getHibernateTemplate().findByNamedParam(query, "photoObj", photo);
         return photoTagList;
+    }
+
+    public List<Photo> getTaggedPhotos(long photoTagId) {
+        String query = "SELECT photoTag.photoList FROM PhotoTag photoTag WHERE photoTag.tagId = :photoTagId";
+        List<Photo> photoList = this.getHibernateTemplate().findByNamedParam(query, "photoTagId", photoTagId);
+        return photoList;
     }
 }

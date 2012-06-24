@@ -1,6 +1,7 @@
 package net.therap.dao;
 
 import net.therap.domain.Photo;
+import net.therap.domain.PhotoTag;
 import net.therap.domain.User;
 import org.hibernate.Session;
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ public class PhotoDao extends HibernateDaoSupport {
         Session session = getSession();
         session.save(photo);
         session.flush();
-/*        //for checking transaction
+        /*//for checking transaction
         if(1==1)
         throw new RuntimeException();
         return 1;*/
@@ -36,7 +37,7 @@ public class PhotoDao extends HibernateDaoSupport {
         Session session = getSession();
         session.update(photo);
         session.flush();
-/*        //for checking transaction
+        /*//for checking transaction
         throw new RuntimeException();*/
     }
 
@@ -46,7 +47,7 @@ public class PhotoDao extends HibernateDaoSupport {
 
     public List<Photo> getPhotos(User user) {
         log.info("in getting comments");
-        String query = "FROM Photo photo WHERE photo.user = :userObj";
+        String query = "FROM Photo photo WHERE photo.user = :userObj ORDER BY photo.photoId";
 
         List<Photo> photos = this.getHibernateTemplate().findByNamedParam(query, "userObj", user);
         log.info("in dao", photos);
@@ -54,7 +55,7 @@ public class PhotoDao extends HibernateDaoSupport {
     }
 
     public List<Photo> getAllPhotos() {
-        String query = "FROM Photo photo";
+        String query = "FROM Photo photo ORDER BY photo.photoId";
 
         List<Photo> photos = this.getHibernateTemplate().find(query);
         log.info("in dao", photos);
@@ -73,5 +74,25 @@ public class PhotoDao extends HibernateDaoSupport {
         Photo photo = getPhoto(photoId);
         session.delete(photo);
         session.flush();
+    }
+
+    public long getPrevPhoto(long id) {
+        String sql = "SELECT MAX(photo.photoId) FROM Photo AS photo WHERE photo.photoId < ?";
+        List result = this.getHibernateTemplate().find(sql, id);
+        if(result.size() != 0)
+            return (Long) result.get(0);
+        String sql2 = "SELECT MAX(photo.photoId) FROM Photo photo";
+        List result2 = this.getHibernateTemplate().find(sql2);
+        return (Long) result2.get(0);
+    }
+
+    public long getNextPhoto(long id) {
+        String sql = "SELECT MIN(photo.photoId) FROM Photo AS photo WHERE photo.photoId > ?";
+        List result = this.getHibernateTemplate().find(sql, id);
+        if(!result.isEmpty())
+            return (Long) result.get(0);
+        String sql2 = "SELECT MIN(photo.photoId) FROM Photo photo";
+        List result2 = this.getHibernateTemplate().find(sql2);
+        return (Long) result2.get(0);
     }
 }

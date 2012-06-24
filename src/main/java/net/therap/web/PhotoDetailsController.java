@@ -87,7 +87,7 @@ public class PhotoDetailsController {
         log.info("aaaaaaaaaaaaaa",isRating);
         if (isComment != null) {
             if (photoReviewCmd.getComment().length() != 0) {
-                int i= photoReviewCmd.getComment().indexOf(",");
+                int i= photoReviewCmd.getComment().lastIndexOf(",");
                 if( i != -1)
                     photoReviewCmd.setComment(photoReviewCmd.getComment().substring(0,i));
                 log.info("in post of comment");
@@ -135,6 +135,4 @@ public class PhotoDetailsController {
 
         return "photodetails";
     }
-
-
 }

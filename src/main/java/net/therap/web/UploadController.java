@@ -20,9 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Blob;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -90,7 +88,7 @@ public class UploadController {
         }
 
         PhotoTag photoTag = photoManager.getPhotoTagObj(photoCmd.getTag());
-        Set<PhotoTag> photoTags = new HashSet<PhotoTag>();
+        List<PhotoTag> photoTags = new ArrayList<PhotoTag>();
         photoTags.add(photoTag);
         Photo photo = new Photo(photoCmd.getCaption(), photoCmd.getLocation(), photoCmd.getDescription(), photoTags);
         photo.setPhoto(blob);

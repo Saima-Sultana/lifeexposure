@@ -42,6 +42,11 @@
                         </td>
                     </tr>
                     <tr>
+                        <td align="right">
+                            <a href="prevphoto.html?photoId=${photo.photoId}">Prev</a> | <a href="nextphoto.html?photoId=${photo.photoId}">Next</a>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>
                             <img src="image/photoimage.html?photoId=${photo.photoId}" alt="photo" border="0"/>
                         </td>
@@ -109,7 +114,7 @@
                     </tr>
                     <tr>
                         <c:forEach var="photoTag" items="${photoTagList}">
-                        <td><a href="explore-tags.html">${photoTag.tag}</a></td>
+                        <td><a href="explore-tags.html?photoTagId=${photoTag.tagId}">${photoTag.tag}</a></td>
                         </c:forEach>
                     </tr>
                 </table>

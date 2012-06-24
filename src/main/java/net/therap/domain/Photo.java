@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.sql.Blob;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -31,14 +32,13 @@ public class Photo {
     private int views = 0;
     private Set<PhotoComments> photoCommentsSet;
     private Set<PhotoRating> photoRatingSet;
-    private Set<PhotoTag> photoTags = new HashSet<PhotoTag>(0);
-    /*private PhotoDetails photoDetails;*/
+    private List<PhotoTag> photoTags;
     private long version;
 
     public Photo() {
     }
 
-    public Photo(String caption, String location, String description, Set<PhotoTag> photoTags) {
+    public Photo(String caption, String location, String description, List<PhotoTag> photoTags) {
         this.caption = caption;
         this.location = location;
         this.description = description;
@@ -175,11 +175,11 @@ public class Photo {
 
     @ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "SS_PHOTO_TAG", joinColumns = { @JoinColumn(name = "PHOTO_ID") }, inverseJoinColumns = { @JoinColumn(name = "TAG_ID") })
-    public Set<PhotoTag> getPhotoTags() {
+    public List<PhotoTag> getPhotoTags() {
         return photoTags;
     }
 
-    public void setPhotoTags(Set<PhotoTag> photoTags) {
+    public void setPhotoTags(List<PhotoTag> photoTags) {
         this.photoTags = photoTags;
     }
 

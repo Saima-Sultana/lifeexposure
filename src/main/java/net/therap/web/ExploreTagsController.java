@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,15 +19,15 @@ import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
- * User: saima
- * Date: 6/11/12
- * Time: 10:58 AM
+ * User: shaila
+ * Date: 6/24/12
+ * Time: 10:20 AM
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-@RequestMapping("myphotos.html")
-public class MyPhotosController {
-    private static final Logger log = LoggerFactory.getLogger(MyPhotosController.class);
+@RequestMapping("explore-tags.html")
+public class ExploreTagsController {
+    private static final Logger log = LoggerFactory.getLogger(ExploreTagsController.class);
 
     @Autowired
     private PhotoManager photoManager;
@@ -40,12 +41,13 @@ public class MyPhotosController {
         }
 
         User user = (User) session.getAttribute("User");
-        List<Photo> photoList = photoManager.getPhotos(user);
+        long photoTagId = ServletRequestUtils.getLongParameter(request, "photoTagId", -1);
+        List<Photo> photoList = photoManager.getTaggedPhotos(photoTagId);
         log.info("listSize", photoList.size());
 
         model.addAttribute("photoList", photoList);
         model.addAttribute("loginName", user.getLoginName());
         model.addAttribute("userId", user.getUserId());
-        return "myphotos";
+        return "explore-tags";
     }
 }

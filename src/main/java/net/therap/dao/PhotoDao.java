@@ -79,7 +79,8 @@ public class PhotoDao extends HibernateDaoSupport {
     public long getPrevPhoto(long id) {
         String sql = "SELECT MAX(photo.photoId) FROM Photo AS photo WHERE photo.photoId < ?";
         List result = this.getHibernateTemplate().find(sql, id);
-        if(result.size() != 0)
+        log.info("rrrrrrrrrr", result);
+        if(result.get(0) != null)
             return (Long) result.get(0);
         String sql2 = "SELECT MAX(photo.photoId) FROM Photo photo";
         List result2 = this.getHibernateTemplate().find(sql2);
@@ -89,7 +90,7 @@ public class PhotoDao extends HibernateDaoSupport {
     public long getNextPhoto(long id) {
         String sql = "SELECT MIN(photo.photoId) FROM Photo AS photo WHERE photo.photoId > ?";
         List result = this.getHibernateTemplate().find(sql, id);
-        if(!result.isEmpty())
+        if(result.get(0) != null)
             return (Long) result.get(0);
         String sql2 = "SELECT MIN(photo.photoId) FROM Photo photo";
         List result2 = this.getHibernateTemplate().find(sql2);

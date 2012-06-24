@@ -27,16 +27,9 @@ public class PhotoRatingDao extends HibernateDaoSupport {
     }
 
     public double getRating(Photo photo) {
-        String query = "FROM PhotoRating photoRating WHERE photoRating.photo = :photoObj";
-        List<PhotoRating> ratingList = this.getHibernateTemplate().findByNamedParam(query, "photoObj", photo);
-
-        if (ratingList.isEmpty())
-            return 0;
-        else {
-            String sql = "SELECT AVG(photoRating.rating) FROM PhotoRating AS photoRating WHERE photoRating.photo = ?";
-            List result = this.getHibernateTemplate().find(sql, photo);
-            return (Double) result.get(0);
-        }
+        String sql = "SELECT AVG(photoRating.rating) FROM PhotoRating AS photoRating WHERE photoRating.photo = ?";
+        List result = this.getHibernateTemplate().find(sql, photo);
+        return (result.get(0) != null) ? (Double) result.get(0):0;
     }
 
     public boolean isDoubleRating(Photo photo, User user) {

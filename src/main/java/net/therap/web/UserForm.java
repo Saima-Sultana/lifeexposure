@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,7 +42,7 @@ public class UserForm {
     }
 
     @RequestMapping(value = "newuser.html", method = RequestMethod.POST)
-    public String processForm(@ModelAttribute("newUser") UserCmd userCmd, BindingResult result, ModelMap model,
+    public ModelAndView processForm(@ModelAttribute("newUser") UserCmd userCmd, BindingResult result, ModelMap model,
                               @RequestParam("file") MultipartFile file) {
 
         log.info("in post");
@@ -50,12 +51,13 @@ public class UserForm {
 
         if (result.hasErrors()) {
             model.addAttribute("newUser", userCmd);
-            return "newuser";
+            return new ModelAndView("newuser");
         }
 
         userManager.saveUser(userCmd);
         log.info("after save");
-        return "redirect:loginform.html";
+        model.addAttribute("successMsg", "successful");
+        return new ModelAndView("redirect:loginform.html", model);
     }
 
     @RequestMapping(value = "edituser.html", method = RequestMethod.GET)

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,6 +44,9 @@ public class LoginForm {
 
     @RequestMapping(method = RequestMethod.GET)
     public String showForm(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+        String successMsg = ServletRequestUtils.getStringParameter(request, "successMsg", null);
+        if(successMsg != null)
+            model.addAttribute("msg", "You have successfully registered. Please log in now.");
         List<Photo> photoList = photoManager.getAllPhotos();
         log.info("listSize", photoList.size());
         model.addAttribute("photoList", photoList);

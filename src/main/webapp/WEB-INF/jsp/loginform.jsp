@@ -106,6 +106,11 @@
                 <c:if test="${empty User}">
                     <table>
                         <tr>
+                            <td class="msgText">
+                                ${msg}
+                            </td>
+                        </tr>
+                        <tr>
                             <td>
                                 <form:form method="POST" commandName="loginForm">
                                     <fieldset>

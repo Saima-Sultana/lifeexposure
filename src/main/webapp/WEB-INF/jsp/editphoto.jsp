@@ -8,6 +8,14 @@
         function returnHome() {
             document.location.href = "photodetails.html?photoId=${photo.photoId}"
         }
+        function delPhoto()
+        {
+            var isOK = confirm("Are you sure to delete this photo?");
+            if(isOK)
+            {
+                document.location.href = "deletephoto.html?photoId=${photo.photoId}"
+            }
+        }
     </script>
 </head>
 
@@ -57,7 +65,7 @@
             </tr>
             <tr>
                 <td>
-                    <b><big><a href="deletephoto.html?photoId=${photo.photoId}">Delete this photo</a></big></b>
+                    <input type="button" align="right" value="Delete" onClick="delPhoto()">
                 </td>
             </tr>
         </table>

@@ -136,3 +136,8 @@ a:hover {
     color: #666666;
     font-style: italic;
 }
+
+.msgText {
+    color: #006600;
+    font-style: italic;
+}

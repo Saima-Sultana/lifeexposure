@@ -39,10 +39,6 @@ public class PhotoDetailsController {
     public String showComment(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         log.info("in pht com get");
         HttpSession session = request.getSession(false);
-
-        if (session == null || session.getAttribute("User") == null) {
-            return "redirect:loginform.html";
-        }
         User user = (User) session.getAttribute("User");
         model.addAttribute("user", user);
 
@@ -51,7 +47,7 @@ public class PhotoDetailsController {
         if(user.getUserId() != photo.getUser().getUserId()) {
             int views = photo.getViews();
             photo.setViews(++views);
-            photoManager.savePhoto(photo);
+            photoManager.updatePhoto(photo);
         }
         session.setAttribute("Photo", photo);
         model.addAttribute("photo", photo);
@@ -133,6 +129,8 @@ public class PhotoDetailsController {
         double rating = photoManager.getRating(photo);
         model.addAttribute("rating", rating);
 
+        List<PhotoTag> photoTagList = photoManager.getPhotoTags(photo);
+        model.addAttribute("photoTagList", photoTagList);
         return "photodetails";
     }
 }

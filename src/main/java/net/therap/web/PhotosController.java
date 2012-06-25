@@ -34,11 +34,6 @@ public class PhotosController {
     @RequestMapping(value = "myphotos.html", method = RequestMethod.GET)
     public String showPhotos(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
-
-        if (session == null || session.getAttribute("User") == null) {
-            return "redirect:loginform.html";
-        }
-
         User user = (User) session.getAttribute("User");
         List<Photo> photoList = photoManager.getPhotos(user);
         log.info("listSize", photoList.size());

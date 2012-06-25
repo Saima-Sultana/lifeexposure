@@ -63,10 +63,6 @@ public class UserForm {
     @RequestMapping(value = "edituser.html", method = RequestMethod.GET)
     public String showEditForm(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("User") == null) {
-            return "redirect:loginform.html";
-        }
-
         User user = (User) session.getAttribute("User");
         UserCmd userCmd = new UserCmd(user.getLoginName(), user.getPassword(), user.getFirstName(), user.getLastName(),
                 user.getBirthDate(), user.getEmail(), user.getCountry(), user.getGender());

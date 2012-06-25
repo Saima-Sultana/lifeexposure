@@ -50,11 +50,7 @@ public class EditPhotoForm {
     @RequestMapping(value = "editphoto.html", method = RequestMethod.GET)
     public String showForm(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
 
-
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("User") == null) {
-            return "redirect:loginform.html";
-        }
 
         long photoId = ServletRequestUtils.getLongParameter(request, "photoId", -1);
         Photo photo = photoManager.getPhoto(photoId);

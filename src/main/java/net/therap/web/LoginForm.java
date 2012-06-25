@@ -45,18 +45,14 @@ public class LoginForm {
     @RequestMapping(method = RequestMethod.GET)
     public String showForm(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         String successMsg = ServletRequestUtils.getStringParameter(request, "successMsg", null);
-        if(successMsg != null)
+        if (successMsg != null)
             model.addAttribute("msg", "You have successfully registered. Please log in now.");
         List<Photo> photoList = photoManager.getAllPhotos();
         log.info("listSize", photoList.size());
         model.addAttribute("photoList", photoList);
 
-        HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("User") == null) {
-            LoginCmd loginForm = new LoginCmd();
-            model.addAttribute("loginForm", loginForm);
-        }
-
+        LoginCmd loginForm = new LoginCmd();
+        model.addAttribute("loginForm", loginForm);
         return "loginform";
     }
 

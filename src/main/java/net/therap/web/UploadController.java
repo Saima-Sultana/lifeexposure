@@ -45,10 +45,6 @@ public class UploadController {
         PhotoCmd photoCmd = new PhotoCmd();
 
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("User") == null) {
-            return "redirect:loginform.html";
-        }
-
         User user = (User) session.getAttribute("User");
         model.addAttribute("loginName", user.getLoginName());
         model.addAttribute("userId", user.getUserId());

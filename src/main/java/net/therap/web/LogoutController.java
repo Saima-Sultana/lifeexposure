@@ -26,10 +26,6 @@ public class LogoutController{
     @RequestMapping(method = RequestMethod.GET)
     public String showForm(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("User") == null) {
-            return "redirect:loginform.html";
-        }
-
         session.invalidate();
         return "redirect:loginform.html";
     }

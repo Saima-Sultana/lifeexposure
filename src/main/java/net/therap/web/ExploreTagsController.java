@@ -36,10 +36,6 @@ public class ExploreTagsController {
     public String showPhotos(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
 
-        if (session == null || session.getAttribute("User") == null) {
-            return "redirect:loginform.html";
-        }
-
         User user = (User) session.getAttribute("User");
         long photoTagId = ServletRequestUtils.getLongParameter(request, "photoTagId", -1);
         List<Photo> photoList = photoManager.getTaggedPhotos(photoTagId);

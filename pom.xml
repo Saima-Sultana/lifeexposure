@@ -57,11 +57,6 @@
             <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
 
         <!--Hibernate-->
         <dependency>
@@ -83,7 +78,7 @@
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.6.12</version>
+            <version>1.6.10</version>
         </dependency>
 
         <!-- Apache Commons Upload -->
@@ -302,7 +297,7 @@
 
     <build>
         <finalName>LifeExposure</finalName>
-        <resources>
+        <!--<resources>
             <resource>
                 <directory>src/main/resources</directory>
             </resource>
@@ -319,7 +314,7 @@
             <testResource>
                 <directory>src/test/resources</directory>
             </testResource>
-        </testResources>
+        </testResources>-->
     </build>
 
 </project>

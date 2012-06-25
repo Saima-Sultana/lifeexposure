@@ -39,7 +39,7 @@ public class PhotoDetailsPublicController {
         Photo photo = photoManager.getPhoto(photoId);
         int views = photo.getViews();
         photo.setViews(++views);
-        photoManager.savePhoto(photo);
+        photoManager.updatePhoto(photo);
         model.addAttribute("photo", photo);
 
         List<PhotoComments> commentsList = photoManager.getPhotoComments(photo);

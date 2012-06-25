@@ -47,8 +47,7 @@
     </bean>
 
     <aop:config>
-        <aop:pointcut id="serviceOperation" expression="execution(* net.therap.service.*Manager.*(..))"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation"/>
+        <aop:advisor pointcut="execution(* net.therap.service.*.*(..))" advice-ref="txAdvice"/>
     </aop:config>
 
     <tx:advice id="txAdvice" transaction-manager="transactionManager">

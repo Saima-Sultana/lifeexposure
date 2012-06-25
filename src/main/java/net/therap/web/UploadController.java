@@ -87,10 +87,17 @@ public class UploadController {
             }
         }
 
-        PhotoTag photoTag = photoManager.getPhotoTagObj(photoCmd.getTag());
-        List<PhotoTag> photoTags = new ArrayList<PhotoTag>();
-        photoTags.add(photoTag);
-        Photo photo = new Photo(photoCmd.getCaption(), photoCmd.getLocation(), photoCmd.getDescription(), photoTags);
+        Photo photo;
+
+        if (!photoCmd.getTag().equals("Select")) {
+            PhotoTag photoTag = photoManager.getPhotoTagObj(photoCmd.getTag());
+            List<PhotoTag> photoTags = new ArrayList<PhotoTag>();
+            photoTags.add(photoTag);
+            photo = new Photo(photoCmd.getCaption(), photoCmd.getLocation(), photoCmd.getDescription(), photoTags);
+        } else {
+            photo = new Photo(photoCmd.getCaption(), photoCmd.getLocation(), photoCmd.getDescription());
+        }
+
         photo.setPhoto(blob);
         photo.setUser(user);
         photo.setUploadDate(new Date());

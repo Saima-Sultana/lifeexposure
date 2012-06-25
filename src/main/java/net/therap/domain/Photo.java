@@ -38,6 +38,12 @@ public class Photo {
     public Photo() {
     }
 
+    public Photo(String caption, String location, String description) {
+        this.caption = caption;
+        this.location = location;
+        this.description = description;
+    }
+
     public Photo(String caption, String location, String description, List<PhotoTag> photoTags) {
         this.caption = caption;
         this.location = location;

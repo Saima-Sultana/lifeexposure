@@ -3,6 +3,7 @@ package net.therap.web;
 import javassist.expr.NewArray;
 import net.therap.command.PhotoCmd;
 import net.therap.domain.Photo;
+import net.therap.domain.PhotoTag;
 import net.therap.domain.User;
 import net.therap.service.PhotoManager;
 import org.hibernate.Hibernate;
@@ -25,7 +26,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -60,8 +63,9 @@ public class EditPhotoForm {
         model.addAttribute("photo", photo);
         model.addAttribute("loginName", user.getLoginName());
         model.addAttribute("userId", user.getUserId());
+        model.addAttribute("photoTagList", photoManager.getAllTags());
 
-        PhotoCmd photoCmd = new PhotoCmd(photo.getCaption(),photo.getLocation(),photo.getDescription());
+        PhotoCmd photoCmd = new PhotoCmd(photo.getCaption(), photo.getLocation(), photo.getDescription());
         model.addAttribute("photoCmd", photoCmd);
         return "editphoto";
     }
@@ -89,17 +93,29 @@ public class EditPhotoForm {
         photo.setLocation(photoCmd.getLocation());
         photo.setDescription(photoCmd.getDescription());
 
+        if (!photoCmd.getTag().equals("Select")) {
+            List<PhotoTag> photoTags = new ArrayList<PhotoTag>();
+
+            List<PhotoTag> photoTagExisting = photoManager.getPhotoTags(photo);
+            for (PhotoTag p : photoTagExisting) {
+                photoTags.add(p);
+            }
+            PhotoTag photoTag = photoManager.getPhotoTagObj(photoCmd.getTag());
+            photoTags.add(photoTag);
+
+            photo.setPhotoTags(photoTags);
+        }
+
         photoManager.updatePhoto(photo);
 
         log.info("after upload");
         return "redirect:photodetails.html?photoId=" + photo.getPhotoId();
     }
 
-    @RequestMapping(value="deletephoto.html", method = RequestMethod.GET)
-	public String deletePhoto(ModelMap model, HttpServletRequest request, HttpServletResponse response)
-	{
-		long photoId = ServletRequestUtils.getLongParameter(request, "photoId", -1);
-		photoManager.deletePhoto(photoId);
-		return "redirect:myphotos.html";
-	}
+    @RequestMapping(value = "deletephoto.html", method = RequestMethod.GET)
+    public String deletePhoto(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+        long photoId = ServletRequestUtils.getLongParameter(request, "photoId", -1);
+        photoManager.deletePhoto(photoId);
+        return "redirect:myphotos.html";
+    }
 }

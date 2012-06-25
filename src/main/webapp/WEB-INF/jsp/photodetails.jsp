@@ -37,7 +37,7 @@
                     <tr>
                         <td align="left">
                             <c:if test="${user.userId==photo.user.userId}">
-                                <b><big><a href="editphoto.html?photoId=${photo.photoId}">Edit</a></big></b>
+                                <a href="editphoto.html?photoId=${photo.photoId}">Edit</a>
                             </c:if>
                         </td>
                     </tr>

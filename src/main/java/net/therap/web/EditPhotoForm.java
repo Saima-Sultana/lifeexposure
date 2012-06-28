@@ -1,6 +1,5 @@
 package net.therap.web;
 
-import javassist.expr.NewArray;
 import net.therap.command.PhotoCmd;
 import net.therap.domain.Photo;
 import net.therap.domain.PhotoTag;

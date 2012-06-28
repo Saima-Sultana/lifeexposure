@@ -24,13 +24,12 @@ public class LoginFilter  implements Filter {
     }
 
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-
-        /*HttpSession session = ((HttpServletRequest) servletRequest).getSession();*/
         String path = ((HttpServletRequest) servletRequest).getRequestURI();
 
         if (path.contains("loginform") || path.contains("newuser") || path.contains("photodetailspublic") || path.contains("image/")) {
             filterChain.doFilter(servletRequest, servletResponse);
-        } else {
+        }
+        else {
             HttpSession session = ((HttpServletRequest) servletRequest).getSession(false);
             User user = (User) session.getAttribute("User");
             if (user == null) {

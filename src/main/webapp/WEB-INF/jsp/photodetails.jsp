@@ -61,11 +61,13 @@
                             ${photo.description}
                         </td>
                     </tr>
-                    <tr>
-                        <td class="tableText">
-                            Location: ${photo.location}
-                        </td>
-                    </tr>
+                    <c:if test="${not empty photo.location}">
+                        <tr>
+                            <td class="tableText">
+                                Location: ${photo.location}
+                            </td>
+                        </tr>
+                    </c:if>
                 </table>
             </td>
             <td width="50px">
